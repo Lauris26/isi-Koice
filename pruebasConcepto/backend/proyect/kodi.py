@@ -36,6 +36,11 @@ def reproducirPelis(idPeli, token):
     my_kodi.Player.Open(item=peli)
     {'id': token, 'jsonrpc': '2.0', 'result': 'OK'}
 
+def reproducirSeries(idSerie, token):
+    peli={'tvshowid':idSerie}
+    my_kodi.Player.Open(item=peli)
+    {'id': token, 'jsonrpc': '2.0', 'result': 'OK'}
+
 def cambiarVolumen(vol):
     my_kodi.Application.SetVolume(volume=vol)
 
