@@ -16,3 +16,6 @@ export FLASK_ENV=development                --> LINUX/MAC; cambia a entorno de d
 #######################################################################################################################
 
 flask run                                   --> ejecuta el servidor flask con la aplicacion definida en el entorno
+
+
+python -m unittest -v test_kodi.py          --> ejecuta la prueba unitest
