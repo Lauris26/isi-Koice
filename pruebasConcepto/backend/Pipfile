@@ -12,3 +12,6 @@ mypy = "*"
 
 [requires]
 python_version = "3"
+
+[scripts]
+export = "$env:FLASK_APP = "main.py""

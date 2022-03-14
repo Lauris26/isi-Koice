@@ -1,6 +1,14 @@
 import json
 from kodipydent import Kodi # type: ignore
 
+
+class KodiAPI:
+    def __init__(self, port, ip='localhost'):
+        self.my_kodi = Kodi(ip, port)
+
+    def obtenerToken(self):
+        return self.my_kodi.Application.GetProperties()
+
 #Login with default kodi/kodi credentials
 my_kodi = Kodi('localhost', port=10080)
 
@@ -19,11 +27,37 @@ def obtenerTodo():
     #library['series'] = series['result']
     return library
 
+def obtenerPelisFiltro(filtro):
+    pelis=my_kodi.VideoLibrary.GetGenres(type='movie')
+    print(pelis)
+    #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "title", "value": "A"})
+
+    #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "title", "value": "A"}, sort={"method": "label", "order": "descending"})
+
+    #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "title", "value": "Avatar"}, properties=["title", "thumbnail", "imdbnumber", "year", "plot", "rating", "genre"])
+
+    #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "startswith", "field": "title", "value": "A"}, properties=[ "year", "rating", "genre"])
+
+    #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"or": [{"operator": "startswith", "field": "title", "value": "A"}, {"operator": "startswith", "field": "title", "value": "The A"}]}, properties=["year", "rating", "genre"])
+
+    #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "year", "value": "2009"}, properties=["year", "rating", "genre"])
+
+    peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "genre", "value": filtro}, properties=["year", "rating", "genre"])
+
+    return peliFil
+
 def obtenerPelis():
     return my_kodi.VideoLibrary.GetMovies()
 
+def obtenerPeliDetalles(idPeli):
+    return my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime", "director", "studio", "year", "plot", "genre", "rating", "mpaa", "imdbnumber", "votes", "lastplayed", "originaltitle", "trailer", "tagline", "plotoutline", "writer", "country", "top250", "sorttitle", "set", "showlink", "thumbnail", "fanart", "tag", "art", "resume", "userrating", "ratings", "dateadded", "premiered", "uniqueid"])
+    #return my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime"])
+
 def obtenerSeries():
     return my_kodi.VideoLibrary.GetTVShows()
+
+def obtenerSerieDetalles(idSerie):
+    return my_kodi.VideoLibrary.GetMovieDetails(tvshowid=idSerie, properties=["title", "playcount", "runtime", "director", "plot", "rating", "votes", "lastplayed", "writer", "firstaired", "productioncode", "season", "episode", "originaltitle", "thumbnail", "fanart", "art", "resume", "userrating", "ratings", "dateadded", "uniqueid"])
 
 def obtenerPortadas():
     portadas = my_kodi.VideoLibrary.GetAvailableArt()
@@ -31,10 +65,17 @@ def obtenerPortadas():
 
 #my_kodi.Player.Open(item={'movieid':1})
 #{'id': '5ab9dab104304ed28268fc1c53f846f4', 'jsonrpc': '2.0', 'result': 'OK'}
-def reproducirPelis(idPeli, token):
+def reproducirPelisOLD(idPeli, token):
     peli={'movieid':idPeli}
     my_kodi.Player.Open(item=peli)
     {'id': token, 'jsonrpc': '2.0', 'result': 'OK'}
+
+def reproducirPelis(idPeli, token):
+    #peli={'movieid':idPeli}
+    #my_kodi.Player.Open(item=peli)
+    my_kodi.Player.Open(item={'movieid':idPeli})
+    #peli={'label': 'Avatar'}
+    #my_kodi.Player.Open(item=peli)
 
 def reproducirSeries(idSerie, token):
     peli={'tvshowid':idSerie}

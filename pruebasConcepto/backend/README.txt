@@ -11,6 +11,8 @@ pip freeze > requirements.txt               --> guarda las depdencias actuales
 export FLASK_APP="main.py"                  --> LINUX/MAC;           declara la variable de entorno para ejecutar el servidor (export linux/mac)
 set FLASK_APP=main.py                       --> WINDOWS/CMD;         declara la variable de entorno para ejecutar el servidor (set windows CMD)
 $env:FLASK_APP = "main.py"                  --> WINDOWS/POWERSHELL;  declara la variable de entorno para ejecutar el servidor ($env: windows PowerShel)
+
+export FLASK_ENV=development                --> LINUX/MAC; cambia a entorno de desarrollo en lugar de production
 #######################################################################################################################
 
 flask run                                   --> ejecuta el servidor flask con la aplicacion definida en el entorno

@@ -13,13 +13,34 @@ def kodi_pelis():
     pelis=kodi.obtenerPelis()
     return jsonify(pelis)
 
+@app.route("/kodi/pelidetalles/<int:peli_id>", methods=['GET', 'POST'])
+def kodi_pelis_detalles(peli_id):
+    pelis=kodi.obtenerPeliDetalles(peli_id)
+    return jsonify(pelis)
+
 @app.route("/kodi/series", methods=['GET', 'POST'])
 def kodi_series():
     series=kodi.obtenerSeries()
     return jsonify(series)
 
-@app.route("/kodi/pelis/<int:peli_id>", methods=['GET', 'POST'])
-def kodi_pelis_id(peli_id):
+@app.route("/kodi/pelis/<string:filtro>", methods=['GET', 'POST'])
+def kodi_pelis_filtro(filtro):
+    print("dentro de filtro: ", filtro)
+    try:
+        tipo=filtro.split("_")[0]
+        dato=filtro.split("_")[1]
+        print("tipo: ", tipo)
+        print("dato: ", dato)
+        pelis=kodi.obtenerPelisFiltro(dato)
+        return jsonify(pelis)
+    except:
+        print("error en filtro")
+    finally:
+        pelis=kodi.obtenerPelisFiltro(filtro)
+        return jsonify(pelis)
+
+@app.route("/kodi/play/peli/<int:peli_id>", methods=['GET', 'POST'])
+def kodi_play_pelis_id(peli_id):
     pelis=kodi.obtenerPelis()
     token=pelis['id']
     print(token)
@@ -27,10 +48,11 @@ def kodi_pelis_id(peli_id):
     print(movies)
     #peli=pelis[peli_id]
     kodi.reproducirPelis(peli_id, token)
+    #kodi.reproducirPelis(movies, token)
     return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK', 'peli_id': movies})
 
-@app.route("/kodi/pelis/<int:serie_id>", methods=['GET', 'POST'])
-def kodi_series_id(serie_id):
+@app.route("/kodi/play/serie/<int:serie_id>", methods=['GET', 'POST'])
+def kodi_play_series_id(serie_id):
     series=kodi.obtenerSeries()
     token=series['id']
     print(token)
@@ -87,10 +109,12 @@ def filtrarSintasisVoz(funcion, dic=""):
         textoVoz=filtrarSeries(textoJson)
     elif funcion =='reproPeli':
         peli_id=dic['entities'][0]['value']
-        kodi_pelis_id(peli_id)
+        kodi_play_pelis_id(peli_id)
         textoVoz="reproduciendo la pelicula numero "+str(peli_id)
     elif funcion =='reproSerie':
-        pass
+        serie_id=dic['entities'][0]['value']
+        kodi_play_series_id(serie_id)
+        textoVoz="reproduciendo la serie numero "+str(serie_id)
     elif funcion =='playPausa':
         kodi_play_pausa()
         textoVoz="pausando el video"
