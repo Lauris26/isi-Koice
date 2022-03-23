@@ -29,6 +29,7 @@ class TestKodi(unittest.TestCase):
         print(library)
         self.assertNotEqual(library, None, "Should be not None")
     '''
+    
     def test_kodi_obtenerSerieCapitulos(self):
         library=self.my_kodi.obtenerSerieCapitulos(1)
         print(library)
@@ -36,11 +37,18 @@ class TestKodi(unittest.TestCase):
         print(primer_elemento)
         self.assertNotEqual(primer_elemento, 'error', "Should be not None")
     '''
+    
     def test_kodi_obtenerSerieDetalles(self):
         library=self.my_kodi.obtenerSerieDetalles(1)
         print(library)
         self.assertNotEqual(library, None, "Should be not None")
+
+    def test_kodi_obtenerSeriesFiltro(self):
+        library=self.my_kodi.obtenerSeriesFiltro('Drama')
+        print(library)
+        self.assertNotEqual(library, None, "Should be not None")
     '''
+
 
 if __name__ == '__main__':
     unittest.main()

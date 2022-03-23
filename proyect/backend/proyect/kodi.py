@@ -57,13 +57,17 @@ class KodiAPI:
         return self.my_kodi.VideoLibrary.GetTVShows()
 
     def obtenerSerieCapitulos(self, idSerie):
-        serie={'tvshowid':idSerie}
+        #serie={'tvshowid':idSerie}
+        serie={'tvshowid':idSerie, 'season':1}
         #return self.my_kodi.VideoLibrary.GetEpisodes(item=serie)
-        return self.my_kodi.VideoLibrary.GetEpisodes(tvshowid=1, properties=["title", "rating"])
+        return self.my_kodi.VideoLibrary.GetEpisodes(tvshowid=3, properties=["title", "rating"])
 
     def obtenerSerieDetalles(self, idSerie):
         return self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "playcount", "runtime", "director", "plot", "rating", "votes", "lastplayed", "writer", "firstaired", "productioncode", "season", "episode", "originaltitle", "thumbnail", "fanart", "art", "resume", "userrating", "ratings", "dateadded", "uniqueid"])
 
+    def obtenerSeriesFiltro(self, filtro):
+        print(filtro)
+        return self.my_kodi.VideoLibrary.GetTVShows(filter={"operator": "contains", "field": "genre", "value": filtro}, properties=["title", "thumbnail", "imdbnumber", "year", "plot", "rating", "genre"])
 
     #my_kodi.Player.Open(item={'movieid':1})
     #{'id': '5ab9dab104304ed28268fc1c53f846f4', 'jsonrpc': '2.0', 'result': 'OK'}
@@ -99,7 +103,4 @@ class KodiAPI:
     def stop(self):
         self.my_kodi.Player.Stop(playerid=1)
 
-    #my_kodi.GUI.ActivateWindow(window="home")
-    def activarVentana(self, ventana):
-        self.my_kodi.GUI.ActivateWindow(window=ventana)
 
