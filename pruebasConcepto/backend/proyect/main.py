@@ -1,8 +1,22 @@
+from tokenize import Pointfloat
 from flask import Flask, jsonify, request
-import kodi
+from kodi import KodiAPI
+#import kodi
 import json
 
 app = Flask(__name__)
+
+IP_KODI="127.0.0.1"
+PORT_KODI=10080
+
+try:
+    kodi=KodiAPI(PORT_KODI, IP_KODI)
+    print("Servidor kodi abierto correctamente")
+
+except Exception as e:
+    print("No se ha podido abrir el servidor kodi")
+    print("excepcion: ", e)
+    exit(0)
 
 @app.route("/")
 def home():
@@ -17,11 +31,6 @@ def kodi_pelis():
 def kodi_pelis_detalles(peli_id):
     pelis=kodi.obtenerPeliDetalles(peli_id)
     return jsonify(pelis)
-
-@app.route("/kodi/series", methods=['GET', 'POST'])
-def kodi_series():
-    series=kodi.obtenerSeries()
-    return jsonify(series)
 
 @app.route("/kodi/pelis/<string:filtro>", methods=['GET', 'POST'])
 def kodi_pelis_filtro(filtro):
@@ -51,6 +60,17 @@ def kodi_play_pelis_id(peli_id):
     #kodi.reproducirPelis(movies, token)
     return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK', 'peli_id': movies})
 
+@app.route("/kodi/series", methods=['GET', 'POST'])
+def kodi_series():
+    series=kodi.obtenerSeries()
+    return jsonify(series)
+
+@app.route("/kodi/series/<int:serie_id>", methods=['GET', 'POST'])
+def kodi_series_capitulos(serie_id):
+    print(serie_id)
+    series=kodi.obtenerSerieCapitulos(serie_id)
+    return jsonify(series)
+
 @app.route("/kodi/play/serie/<int:serie_id>", methods=['GET', 'POST'])
 def kodi_play_series_id(serie_id):
     series=kodi.obtenerSeries()
@@ -76,20 +96,30 @@ def kodi_stop():
     kodi.stop()
     return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK'})
 
+@app.route("/kodi/cambiarVolumen/<int:vol>", methods=['GET', 'POST'])
+def kodi_cambiarVolumen(vol):
+    series=kodi.obtenerSeries()
+    token=series['id']
+    kodi.cambiarVolumen(vol)
+    return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK'})
 
 
 @app.route("/test/v2", methods=['POST'])
 def testinput():
-    textoDic=json.loads(request.data.decode('utf-8'))
-    print("RECIVIDO DE VOZ")
-    print(textoDic)
-    funcion=textoDic['intent']['name']
-    print("funcion : ",funcion)
-    print(textoDic['entities'])
-    #print(textoDic['entities'][0]['value'])
-    #texto=switchFuncVoz(funcion)
-    #print(texto['result']['movies'])
-    tex = filtrarSintasisVoz(funcion, textoDic)
+    try:
+        textoDic=json.loads(request.data.decode('utf-8'))
+        print("RECIVIDO DE VOZ")
+        print(textoDic)
+        funcion=textoDic['intent']['name']
+        print("funcion : ",funcion)
+        print(textoDic['entities'])
+        #print(textoDic['entities'][0]['value'])
+        #texto=switchFuncVoz(funcion)
+        #print(texto['result']['movies'])
+        tex = filtrarSintasisVoz(funcion, textoDic)
+    except Exception as e:
+        print("No se ha podido entender el comando de voz")
+        print("excepcion: ", e)
 
     #tex= "has ejecutado la funcion "+funcion+" ,"
     print(tex)
@@ -121,6 +151,10 @@ def filtrarSintasisVoz(funcion, dic=""):
     elif funcion =='stop':
         kodi_stop()
         textoVoz="parando el video"
+    elif funcion =='cambiarVolumen':
+        vol=dic['entities'][0]['value']
+        kodi_cambiarVolumen(vol)
+        textoVoz="volumen establecido en "+str(vol)
 
     return textoVoz
 
@@ -168,6 +202,7 @@ def switchFuncVoz(funcion):
         'obtenerSeries' : kodi.obtenerSeries(),
     }
     return switch.get(funcion, "invalido")
+
 
 if __name__ == '__main__':
     app.run()
