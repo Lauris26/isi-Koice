@@ -51,6 +51,7 @@
         </div>
       </div>
     </div>
+    
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
@@ -61,124 +62,58 @@
     </button>
   </div>
 
+
 <div class="album">
     <div class="container">
       <div class="row catalogo">
-        <div class="col">
-          <div class="elementoPelicula" >
-            <a href="#"></a>
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-            
+
+        <div class="col" v-for="id in peliculas" v-bind:key="id">
+          <div class="elementoPelicula">
+            <img class="card-image" :src="getPic(id)">
+            <div class="titlePoster">{{id.titulo}}</div>
           </div>
         </div>
-
-        <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>       
-        </div>
-
-        <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-                <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-                <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-
-                <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
-                <div class="col">
-          <div class="elementoPelicula">
-            <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-            <div class="titlePoster">Avengers: Endgame</div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
   </div>
 
-
 </template>
 
+
 <script>
+import fetch from 'node-fetch';
+import { peliculas }  from '../main.js';
 
-// fetch("../informacion.json")
-//     .then(function(resp){
-//         return resp.json();
-//     })
-//     .then(function(data){
-//     console.log(data)
-//     });
+export default{
+    name:"MandoKoice",
+     data(){
+       return{
+        peliculas
+      }
+    },
+    methods: {
+        async algo(){
+          const response = await fetch('http://127.0.0.1:5000/');
+          const body = await response.text();
+          return body['result'];
+        },
 
-// var data = [{  
-//         "Title":"Avengers: Endgame",
-//         "Type":"movie",
-//         "Year": "2019",
-//         "Poster":"https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg",
-//         "Plot": "asdfasdfasdfasdfasdf"
-//     },
-//     {  
-//         "Title":"Avengers: Endgame",
-//         "Type":"movie",
-//         "Poster":"https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg"
-//     }
-// ];
+        getPic(peliculas) {
+          return peliculas.poster;
+        },
+    },
 
-
-// function getMovie(id) {
-//   return data.filter(
-//       function(data){ return data.id == id }
-//   );
-// }
-
-// var found = getMovie('2019');
-
-// document.getElementById('Titulo').innerHTML = found[0].Title;
-
+    beforeCreate() {
+      console.log('No se ha ejecutado nada todavía')
+    },
+    created: () => console.log("Componentes cargados"),
+    mounted() {
+      console.log(this.$el.querySelectorAll('a'));
+    },
+    updated() {
+      console.log("Componente actualizado");
+    }
+};
 
 </script>

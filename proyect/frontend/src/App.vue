@@ -87,7 +87,7 @@
   <router-view/>
   
 
-   <footer class="footer mt-auto py-3 bg-light">
+  <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
       <span class="text-muted">Pagina realizada para el proyecto de la asignatura de Integracion de sistemas informaticos</span>
       <div>
@@ -104,5 +104,20 @@
 export default {
     name: 'App',
     components: {},
+    data(){
+      return{
+        peliculas:[
+          {
+            id: 1,
+            titulo: "vengadores"
+          },
+          {
+            id:2,
+            titulo: "vengadores 2"
+          }
+        ]
+      }
+    }
+
 };
 </script>

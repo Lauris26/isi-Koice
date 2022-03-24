@@ -1,4 +1,5 @@
 <template>
+
 <div class="mando">
     <div class="row">
         <div class="col settings">
@@ -59,3 +60,38 @@
 
 
 </template>
+
+
+<script>
+import fetch from 'node-fetch';
+
+export default{
+    name:"MandoKoice",
+     data(){
+      return{
+        peliculas:[
+          {
+            id: 1,
+            titulo: "vengadores"
+          },
+          {
+            id:2,
+            titulo: "vengadores 2"
+          },
+          {
+            id:3,
+            titulo: "vengadores 3"
+          }
+        ]
+      }
+    },
+    methods: {
+        async algo(){
+            const response = await fetch('http://127.0.0.1:5000/');
+            const body = await response.text();
+            return body['result'];
+        }
+        
+    },
+};
+</script>
