@@ -3,7 +3,6 @@ import App from './App.vue'
 import 'bootstrap';
 import { createRouter, createWebHistory } from 'vue-router';
 import fetch from 'node-fetch';
-// import router from './router'
 
 
 export async function algo(){
@@ -70,7 +69,7 @@ export const peliculas = [
     },
     {
       id:2,
-      poster: "https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg",
+      poster: "https://m.media-amazon.com/images/M/MV5BMDY4OTIwMTgtZTE1OC00ZjUwLWJhNzMtOWMxOGZiZGRiZmNiXkEyXkFqcGdeQXVyODIxOTM4MTk@._V1_.jpg",
       titulo: "vengadores 2"
     },
     {
@@ -80,6 +79,27 @@ export const peliculas = [
     }
 ]
 
+export function obtenerPelis(){
+    const peliculas2 = [
+      {
+        id: 1,
+        poster: "https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg",
+        titulo: "vengadores"
+      },
+      {
+        id:2,
+        poster: "https://m.media-amazon.com/images/M/MV5BMDY4OTIwMTgtZTE1OC00ZjUwLWJhNzMtOWMxOGZiZGRiZmNiXkEyXkFqcGdeQXVyODIxOTM4MTk@._V1_.jpg",
+        titulo: "vengadores 2"
+      },
+      {
+        id:3,
+        poster: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+        titulo: "vengadores asdfasdf"
+      }
+  ]
+  return peliculas2
+  }
+  
 
 //////////////////////////////////////////
 

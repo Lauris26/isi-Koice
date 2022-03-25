@@ -1,6 +1,7 @@
 <template>
 
 <div class="mando">
+     <button v-on:click="metodo">Add 1</button>
     <div class="row">
         <div class="col settings">
             <div class="col container">
@@ -90,7 +91,11 @@ export default{
             const response = await fetch('http://127.0.0.1:5000/');
             const body = await response.text();
             return body['result'];
-        }
+        },
+
+         metodo: function (event) {
+           alert(event.target.tagName)
+    }
         
     },
 };

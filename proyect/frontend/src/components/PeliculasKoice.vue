@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    
+
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
@@ -62,15 +62,22 @@
     </button>
   </div>
 
+<h2>{{peliculas2.id}}</h2>
+
+<h2 >{{count}}</h2>
+
+
+<button v-on:click=pelisC></button>
 
 <div class="album">
     <div class="container">
       <div class="row catalogo">
 
-        <div class="col" v-for="id in peliculas" v-bind:key="id">
+        <div class="col" v-for="item in peliculas2" v-bind:key="item.id">
           <div class="elementoPelicula">
-            <img class="card-image" :src="getPic(id)">
-            <div class="titlePoster">{{id.titulo}}</div>
+             <img class="card-image" :src="getPic(item)"> 
+            <div class="titlePoster">{{item.titulo}}</div>
+            
           </div>
         </div>
       </div>
@@ -83,13 +90,18 @@
 
 <script>
 import fetch from 'node-fetch';
-import { peliculas }  from '../main.js';
+import { obtenerPelis, peliculas }  from '../main.js';
+
 
 export default{
     name:"MandoKoice",
      data(){
+       
        return{
-        peliculas
+        peliculas,
+        peliculas2 : [],
+        count : 1
+
       }
     },
     methods: {
@@ -99,21 +111,32 @@ export default{
           return body['result'];
         },
 
-        getPic(peliculas) {
-          return peliculas.poster;
+        getPic(peliculas2) {
+          return peliculas2.poster;
         },
+
+        pelisC(){
+          this.peliculas2 = obtenerPelis();
+          this.count =2;
+          
+        }
+        
+        
     },
 
-    beforeCreate() {
-      console.log('No se ha ejecutado nada todavía')
-    },
-    created: () => console.log("Componentes cargados"),
-    mounted() {
-      console.log(this.$el.querySelectorAll('a'));
-    },
-    updated() {
-      console.log("Componente actualizado");
-    }
+    // beforeCreate() {
+    //   console.log('No se ha ejecutado nada todavía')
+    // },
+    created() {
+      this.pelisC();
+     },
+    //  mounted() {
+    //  fetch('http://localhost:8080/')
+    //  .then((data) => this.peliculas2 = data)
+    // },
+    // updated() {
+    //   console.log("Componente actualizado");
+    // }
 };
 
 </script>
