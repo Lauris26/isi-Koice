@@ -1,5 +1,6 @@
 import json
 from kodipydent import Kodi # type: ignore
+from imdbApi import obtenerPortada
 
 
 class KodiAPI:
@@ -11,6 +12,19 @@ class KodiAPI:
         self.my_kodi=Kodi(ip, port=port1)
         #self.my_kodi=None
         print(type(self.my_kodi))
+
+    def addPortada(self, dicciPelis):
+        lisPelis=[]
+        for peli in dicciPelis['result']['movies']:
+            dicPelis={
+                'id': peli['movieid'],
+                'poster': obtenerPortada(peli['label']),
+                'titulo': peli['label']
+            }
+            lisPelis.append(dicPelis)
+        dicciPelis['result']['movies']=lisPelis
+
+        return dicciPelis
         
     def obtenerToken(self):
         return self.my_kodi.Application.GetProperties()
@@ -27,7 +41,7 @@ class KodiAPI:
     
 
     def obtenerPelis(self):
-        return self.my_kodi.VideoLibrary.GetMovies()
+        return self.addPortada(self.my_kodi.VideoLibrary.GetMovies())
 
     def obtenerPeliDetalles(self, idPeli):
         return self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime", "director", "studio", "year", "plot", "genre", "rating", "mpaa", "imdbnumber", "votes", "lastplayed", "originaltitle", "trailer", "tagline", "plotoutline", "writer", "country", "top250", "sorttitle", "set", "showlink", "thumbnail", "fanart", "tag", "art", "resume", "userrating", "ratings", "dateadded", "premiered", "uniqueid"])
@@ -58,9 +72,10 @@ class KodiAPI:
 
     def obtenerSerieCapitulos(self, idSerie):
         #serie={'tvshowid':idSerie}
-        serie={'tvshowid':idSerie, 'season':1}
+        #serie={'tvshowid':idSerie, 'season':1}
         #return self.my_kodi.VideoLibrary.GetEpisodes(item=serie)
-        return self.my_kodi.VideoLibrary.GetEpisodes(tvshowid=3, properties=["title", "rating"])
+        return self.my_kodi.VideoLibrary.GetSeasons(tvshowid=idSerie)
+        #return self.my_kodi.VideoLibrary.GetEpisodes(tvshowid=3, properties=["title", "rating"])
 
     def obtenerSerieDetalles(self, idSerie):
         return self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "playcount", "runtime", "director", "plot", "rating", "votes", "lastplayed", "writer", "firstaired", "productioncode", "season", "episode", "originaltitle", "thumbnail", "fanart", "art", "resume", "userrating", "ratings", "dateadded", "uniqueid"])

@@ -1,4 +1,4 @@
-from tokenize import Pointfloat
+from flask_cors import CORS
 from flask import Flask, jsonify, request
 from kodi import KodiAPI
 #import kodi
@@ -6,6 +6,7 @@ import json
 import controlVoz
 
 app = Flask(__name__)
+CORS(app)
 
 IP_KODI="127.0.0.1"
 PORT_KODI=10080
