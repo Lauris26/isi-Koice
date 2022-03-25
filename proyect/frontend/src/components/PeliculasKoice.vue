@@ -67,7 +67,7 @@
 <h2 >{{count}}</h2>
 
 
-<button v-on:click=pelisC></button>
+<button v-on:click=algo()></button>
 
 <div class="album">
     <div class="container">
@@ -91,6 +91,7 @@
 <script>
 import fetch from 'node-fetch';
 import { obtenerPelis, peliculas }  from '../main.js';
+//import {obtenerSeries} from '../api.js';
 
 
 export default{
@@ -106,7 +107,7 @@ export default{
     },
     methods: {
         async algo(){
-          const response = await fetch('http://127.0.0.1:5000/');
+          const response = await fetch('http://127.0.0.1:5000/kodi/pelis');
           const body = await response.text();
           return body['result'];
         },
