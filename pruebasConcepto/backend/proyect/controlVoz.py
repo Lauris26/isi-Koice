@@ -1,4 +1,4 @@
-import kodi
+import kodi 
 
 
 def filtrarSintasisVoz(funcion, dic=""):

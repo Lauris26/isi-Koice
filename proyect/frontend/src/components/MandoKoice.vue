@@ -31,6 +31,8 @@
         <div class="col controls">
             <div class="play">
                 <a class="btn btn-lg btn-secondary" href="#">
+                    <button v-on:click=playPausa></button>
+
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="84" height="84" fill="none" stroke="#957fb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg>
                 </a>
             </div>
@@ -90,8 +92,13 @@ export default{
             const response = await fetch('http://127.0.0.1:5000/');
             const body = await response.text();
             return body['result'];
+        },
+        async playPausa(){
+            fetch('http://127.0.0.1:5000/kodi/play_pause');
+        },
+        async stop(){
+            fetch('http://127.0.0.1:5000/kodi/stop');
         }
-        
     },
 };
 </script>

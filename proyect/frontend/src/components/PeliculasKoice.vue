@@ -62,34 +62,40 @@
     </button>
   </div>
 
+<button v-on:click=pelicu></button>
+<h2 >{{cosa}}</h2>
 
 <div class="album">
     <div class="container">
       <div class="row catalogo">
-
-        <div class="col" v-for="id in peliculas" v-bind:key="id">
+        <div class="col peliculas" v-for="item in peliculas" v-bind:key="item.id">
           <div class="elementoPelicula">
-            <img class="card-image" :src="getPic(id)">
-            <div class="titlePoster">{{id.titulo}}</div>
+             <router-link to="/informacion" class="nav-link px-2 link-dark">
+             <img class="card-image" :src="getPic(item)"> 
+             <div class="titlePoster">{{item.titulo}}</div>
+             %pelicu(item.id)%
+             </router-link>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 </template>
 
 
 <script>
 import fetch from 'node-fetch';
-import { peliculas }  from '../main.js';
+//import { peliculas }  from '../main.js';
+import { obtenerPeliculas }  from '../api.js';
 
 export default{
     name:"MandoKoice",
      data(){
        return{
-        peliculas
+        peliculas:null,
+        cosa:null
       }
     },
     methods: {
@@ -98,16 +104,26 @@ export default{
           const body = await response.text();
           return body['result'];
         },
-
         getPic(peliculas) {
           return peliculas.poster;
         },
+        pelicu(idPeli){
+          this.cosa=idPeli;
+          //InformacionElementoVue.idPelicula=idPeli;
+          console.log('cosa',this.cosa);
+        },
+        async obtenerPelis(){
+          this.peliculas=await obtenerPeliculas();
+        }
     },
 
     beforeCreate() {
       console.log('No se ha ejecutado nada todavía')
     },
-    created: () => console.log("Componentes cargados"),
+    created() {
+    console.log("Componentes cargados"),
+    this.obtenerPelis();
+    }, 
     mounted() {
       console.log(this.$el.querySelectorAll('a'));
     },

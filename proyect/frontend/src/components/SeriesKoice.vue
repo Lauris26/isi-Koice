@@ -64,17 +64,18 @@
 <div class="album">
     <div class="container">
       <div class="row catalogo">
-
-        <div class="col" v-for="id in peliculas" v-bind:key="id">
+        <div class="col peliculas" v-for="item in peliculas" v-bind:key="item.id">
           <div class="elementoPelicula">
-            <img class="card-image" :src="getPic(id)">
-            <div class="titlePoster">{{id.titulo}}</div>
+             <router-link to="/informacion" class="nav-link px-2 link-dark">
+             <img class="card-image" :src="getPic(item)"> 
+             <div class="titlePoster">{{item.titulo}}</div>
+             </router-link>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 
 
@@ -82,32 +83,31 @@
 
 
 <script>
-import fetch from 'node-fetch';
-import { peliculas }  from '../main.js';
+import { obtenerSeries }  from '../api.js'; 
 
 export default{
     name:"MandoKoice",
      data(){
        return{
-        peliculas
+        peliculas:null,
       }
     },
     methods: {
-        async algo(){
-          const response = await fetch('http://127.0.0.1:5000/');
-          const body = await response.text();
-          return body['result'];
-        },
-
         getPic(peliculas) {
           return peliculas.poster;
         },
+        async obtenerSeries(){
+          this.peliculas=await obtenerSeries();
+        }
     },
 
     beforeCreate() {
       console.log('No se ha ejecutado nada todavía')
     },
-    created: () => console.log("Componentes cargados"),
+    created() {
+    console.log("Componentes cargados"),
+    this.obtenerSeries();
+    }, 
     mounted() {
       console.log(this.$el.querySelectorAll('a'));
     },

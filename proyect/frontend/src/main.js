@@ -59,6 +59,12 @@ router.afterEach(() => {
     console.log('Router after each');
 });
 
+export async function pruebaa(){
+    const response = await fetch("http://127.0.0.1:5000/kodi/pelis")
+    const body = await response.json()
+    return body['result']['movies'];
+  
+  }
 
 
 

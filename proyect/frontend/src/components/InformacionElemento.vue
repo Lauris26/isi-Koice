@@ -129,5 +129,55 @@
     
   </div>
 
- </template>
+</template>
 
+<script>
+import { pruebaa }  from '../main.js';
+
+export default{
+    name:"MandoKoice",
+     data(){
+       return{
+        peliculas:null,
+        cosa:null,
+        idPelicula:null,
+      }
+    },
+    methods: {
+        async algo(){
+          const response = await fetch('http://127.0.0.1:5000/');
+          const body = await response.text();
+          return body['result'];
+        },
+        getPic(peliculas) {
+          return peliculas.poster;
+        },
+        pelicu(idPeli){
+          this.cosa=idPeli;
+          
+          console.log('cosa',this.cosa);
+        },
+        async obtenerPelis(){
+          this.peliculas=await pruebaa();
+        },
+        peliUso(){
+          this.idPelicula=this.cosa;
+        }
+    },
+
+    beforeCreate() {
+      console.log('No se ha ejecutado nada todavía')
+    },
+    created() {
+    console.log("Componentes cargados"),
+    this.obtenerPelis();
+    }, 
+    mounted() {
+      console.log(this.$el.querySelectorAll('a'));
+    },
+    updated() {
+      console.log("Componente actualizado");
+    }
+};
+
+</script>

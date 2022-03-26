@@ -1,6 +1,6 @@
 import json
 from kodipydent import Kodi # type: ignore
-from imdbApi import obtenerPortada
+from imdbApi import obtenerPortada, obtenerActoresPeli
 
 
 class KodiAPI:
@@ -11,7 +11,7 @@ class KodiAPI:
         #Login with default kodi/kodi credentials
         self.my_kodi=Kodi(ip, port=port1)
         #self.my_kodi=None
-        print(type(self.my_kodi))
+        #print(type(self.my_kodi))
 
     def addPortada(self, dicciPelis):
         lisPelis=[]
@@ -24,6 +24,41 @@ class KodiAPI:
             lisPelis.append(dicPelis)
         dicciPelis['result']['movies']=lisPelis
 
+        return dicciPelis
+
+    def addPortadaSerie(self, dicVideo):
+        lisVideo=[]
+        for serie in dicVideo['result']['tvshows']:
+            dicPelis={
+                'id': serie['tvshowid'],
+                'poster': obtenerPortada(serie['label']),
+                'titulo': serie['label']
+            }
+            lisVideo.append(dicPelis)
+        dicVideo['result']['tvshows']=lisVideo
+
+        return dicVideo
+
+    def addActores(self, dicciPelis):
+        #print(dicciPelis)
+        dicciPelis['result']['moviedetails']['poster']=obtenerPortada(dicciPelis['result']['moviedetails']['title'])
+        dicciPelis['result']['moviedetails']['actores']=obtenerActoresPeli(dicciPelis['result']['moviedetails']['title'])
+        dicciPelis['result']['moviedetails']['runtime']=int(dicciPelis['result']['moviedetails']['runtime']/60)
+        '''
+        lisPelis=[]
+        for peli in dicciPelis['result']['moviedetails']:
+            dicPelis={
+                'id': peli['movieid'],
+                'poster': obtenerPortada(peli['label']),
+                'titulo': peli['label'],
+                'resumen': peli['plot'],
+                'tiempo' : peli['runtime'],
+                'generos': peli['genre'],
+                'actores': obtenerActores(peli['label'])
+            }
+            lisPelis.append(dicPelis)
+        dicciPelis['result']['moviedetails']=lisPelis
+        '''
         return dicciPelis
         
     def obtenerToken(self):
@@ -44,8 +79,9 @@ class KodiAPI:
         return self.addPortada(self.my_kodi.VideoLibrary.GetMovies())
 
     def obtenerPeliDetalles(self, idPeli):
-        return self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime", "director", "studio", "year", "plot", "genre", "rating", "mpaa", "imdbnumber", "votes", "lastplayed", "originaltitle", "trailer", "tagline", "plotoutline", "writer", "country", "top250", "sorttitle", "set", "showlink", "thumbnail", "fanart", "tag", "art", "resume", "userrating", "ratings", "dateadded", "premiered", "uniqueid"])
-        #return my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime"])
+        #return self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime", "director", "studio", "year", "plot", "genre", "rating", "mpaa", "imdbnumber", "votes", "lastplayed", "originaltitle", "trailer", "tagline", "plotoutline", "writer", "country", "top250", "sorttitle", "set", "showlink", "thumbnail", "fanart", "tag", "art", "resume", "userrating", "ratings", "dateadded", "premiered", "uniqueid"])
+        #return self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"])
+        return self.addActores(self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"]))
 
     def obtenerPelisFiltro(self, filtro):
         pelis=self.my_kodi.VideoLibrary.GetGenres(type='movie')
@@ -68,7 +104,8 @@ class KodiAPI:
 
 
     def obtenerSeries(self):
-        return self.my_kodi.VideoLibrary.GetTVShows()
+        #return self.my_kodi.VideoLibrary.GetTVShows()
+        return self.addPortadaSerie(self.my_kodi.VideoLibrary.GetTVShows())
 
     def obtenerSerieCapitulos(self, idSerie):
         #serie={'tvshowid':idSerie}

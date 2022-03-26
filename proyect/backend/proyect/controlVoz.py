@@ -1,4 +1,4 @@
-import kodi
+from kodiApi import KodiAPI as kodi
 
 
 def filtrarSintasisVoz(funcion, dic=""):

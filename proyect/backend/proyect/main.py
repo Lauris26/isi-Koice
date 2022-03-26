@@ -1,6 +1,6 @@
 from flask_cors import CORS
 from flask import Flask, jsonify, request
-from kodi import KodiAPI
+from kodiApi import KodiAPI
 #import kodi
 import json
 import controlVoz
