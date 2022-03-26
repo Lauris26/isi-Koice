@@ -6,7 +6,6 @@
         <div class="poster">
           <img src="../assets/bohemian.jpg" > 
           <button class="btn play" ><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#f4f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z" fill="#fbf7f7" opacity="1" stroke-width="0"></path><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg></button>
-          
         </div>
 
         <div class="row">
@@ -26,7 +25,6 @@
             
           </div>
           <div class="col mando"> 
-            
             <button class="btn mando"> Mando</button>
           </div>
 
@@ -36,6 +34,18 @@
            Un día, tras escuchar al grupo Smile en un bar, se ofrece como cantante de la banda al enterarse de que se han quedado sin vocalista. </p>
         </div>
         <br>
+
+        <div class="reparto">
+          <h3 class="titloDescripcion">Temporadas</h3>
+          <div class="row">
+            <div class="col" v-for="item in peliculas2" :key="item.id">
+              <div class="elenco">
+                 <img class="card-image" :src="getPic(item)"> 
+                <div class="titlePoster">{{item.titulo}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <div class="reparto">
           <h3 class="titloDescripcion">Reparto</h3>
@@ -101,9 +111,6 @@
       </div> 
     </div>
   </div>
-
-
-  
 </template>
 
 <script>
@@ -129,6 +136,5 @@ export default{
     this.pelisC();
     this.id = this.$route.params.id;
   },
-  
 }
 </script>

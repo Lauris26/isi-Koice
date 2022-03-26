@@ -1,15 +1,7 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import 'bootstrap';
 import { createRouter, createWebHistory } from 'vue-router';
-import fetch from 'node-fetch';
-
-
-export async function algo(){
-    const response = await fetch('http://127.0.0.1:5000/');
-    const body = await response.text();
-    return body['result'];
-}
 
 const routes = [
 {
@@ -28,10 +20,15 @@ const routes = [
         component: () => import('./components/MandoKoice.vue')
     },
     {
-        path: '/informacion',
+        path: '/informacion/:id',
         name: 'informacion',
         component: () => import('./components/InformacionElemento.vue')
     },
+    {
+      path: '/informacionSeries/:id',
+      name: 'informacionSeries',
+      component: () => import('./components/InformacionSeries.vue')
+  },
     {
         path:'',
         component: () => import('./components/PeliculasKoice.vue')
@@ -59,26 +56,6 @@ router.afterEach(() => {
 });
 
 
-
-
-export const peliculas = [
-    {
-      id: 1,
-      poster: "https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg",
-      titulo: "vengadores"
-    },
-    {
-      id:2,
-      poster: "https://m.media-amazon.com/images/M/MV5BMDY4OTIwMTgtZTE1OC00ZjUwLWJhNzMtOWMxOGZiZGRiZmNiXkEyXkFqcGdeQXVyODIxOTM4MTk@._V1_.jpg",
-      titulo: "vengadores 2"
-    },
-    {
-      id:3,
-      poster: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
-      titulo: "vengadores 3"
-    }
-]
-
 export function obtenerPelis(){
     const peliculas2 = [
       {
@@ -95,39 +72,28 @@ export function obtenerPelis(){
         id:3,
         poster: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
         titulo: "vengadores asdfasdf"
+      },
+      {
+        id:4,
+        poster: "https://m.media-amazon.com/images/M/MV5BMDY4OTIwMTgtZTE1OC00ZjUwLWJhNzMtOWMxOGZiZGRiZmNiXkEyXkFqcGdeQXVyODIxOTM4MTk@._V1_.jpg",
+        titulo: "vengadores hasta el infinito"
+      },
+      {
+        id:5,
+        poster: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+        titulo: "vengadores super guays"
+      },
+      {
+        id:6,
+        poster: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+        titulo: "esto no se deberia de ver"
       }
   ]
   return peliculas2
   }
-  
-
-//////////////////////////////////////////
-
-export const carrusel = [
-    {
-      id: 1,
-      poster: "https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg",
-      titulo: "Avatar",
-      Description: "En un exuberante planeta llamado Pandora viven los Na'vi, seres que aparentan ser primitivos pero que en realidad son muy evolucionados. Debido a que el ambiente de Pandora es venenoso, los híbridos humanos/Na'vi, llamados Avatares, están relacionados con las mentes humanas, lo que les permite moverse libremente por Pandora. Jake Sully, unexinfante de marina paralítico se transforma a través de un Avatar, y se enamora de una mujer Na'vi.",
-    },
-    {
-      id:2,
-      poster: "https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg",
-      titulo: "Parasitos",
-      Description: "Tanto Gi Taek como su familia están sin trabajo. Cuando su hijo mayor, Gi Woo, empieza a recibir clases particulares en la adinerada casa de Park, las dos familias, que tienen mucho en común pese a pertenecer a dos mundos totalmente distintos, comienzan una relación de resultados imprevisibles."
-    },
-    {
-      id:3,
-      poster: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
-      titulo: "Batman ",
-      Description: "En su segundo año luchando contra el crimen, Batman explora la corrupción existente en la ciudad de Gotham y el vínculo de esta con su propia familia. Además, entrará en conflicto con un asesino en serie conocido como el Acertijo."
-    }
-]
-
 
 const app = createApp(App)
 app.use(router)
-
 app.mount('#app')
 
 
