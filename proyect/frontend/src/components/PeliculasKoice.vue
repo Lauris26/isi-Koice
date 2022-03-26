@@ -62,7 +62,7 @@
     </button>
   </div>
 
-<button v-on:click=pelicu></button>
+<button v-on:click=pelicu(1)></button>
 <h2 >{{cosa}}</h2>
 
 <div class="album">
@@ -70,10 +70,9 @@
       <div class="row catalogo">
         <div class="col peliculas" v-for="item in peliculas" v-bind:key="item.id">
           <div class="elementoPelicula">
-             <router-link to="/informacion" class="nav-link px-2 link-dark">
+             <router-link :to="{ name: 'informacion', params: { id: item.id } }" class="nav-link px-2 link-dark">
              <img class="card-image" :src="getPic(item)"> 
              <div class="titlePoster">{{item.titulo}}</div>
-             %pelicu(item.id)%
              </router-link>
           </div>
         </div>
@@ -87,7 +86,7 @@
 
 <script>
 import fetch from 'node-fetch';
-//import { peliculas }  from '../main.js';
+//import { getVideoUso, setVideoUso }  from '../main.js';
 import { obtenerPeliculas }  from '../api.js';
 
 export default{
@@ -109,11 +108,15 @@ export default{
         },
         pelicu(idPeli){
           this.cosa=idPeli;
-          //InformacionElementoVue.idPelicula=idPeli;
-          console.log('cosa',this.cosa);
+          //InformacionElemento.idPelicula=idPeli;
+          //setVideoUso(idPeli);
+          //console.log('id ', getVideoUso());
         },
         async obtenerPelis(){
           this.peliculas=await obtenerPeliculas();
+        },
+        videoUdo (idPeli){
+          this.id=idPeli;
         }
     },
 
@@ -123,6 +126,7 @@ export default{
     created() {
     console.log("Componentes cargados"),
     this.obtenerPelis();
+    this.videoUdo(1);
     }, 
     mounted() {
       console.log(this.$el.querySelectorAll('a'));

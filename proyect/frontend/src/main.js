@@ -5,13 +5,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import fetch from 'node-fetch';
 // import router from './router'
 
-
-export async function algo(){
-    const response = await fetch('http://127.0.0.1:5000/');
-    const body = await response.text();
-    return body['result'];
-}
-
 const routes = [
 {
         path: '/peliculas',
@@ -29,7 +22,7 @@ const routes = [
         component: () => import('./components/MandoKoice.vue')
     },
     {
-        path: '/informacion',
+        path: '/informacion:id',
         name: 'informacion',
         component: () => import('./components/InformacionElemento.vue')
     },
@@ -65,7 +58,6 @@ export async function pruebaa(){
     return body['result']['movies'];
   
   }
-
 
 
 export const peliculas = [
@@ -112,6 +104,8 @@ export const carrusel = [
 
 
 const app = createApp(App)
+app.config.globalProperties.foo = 'datoCompartido';
+
 app.use(router)
 
 app.mount('#app')

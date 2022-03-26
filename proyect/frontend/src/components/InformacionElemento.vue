@@ -1,80 +1,56 @@
 <template>
 <div class="containerInformacion">
+<div class="hello">
+        <h1>{{ msg }}, your id is {{ id }}</h1>
+        <button v-on:click=reproducirPeli></button>
+    </div>
+
+
     <div class="row informacion">
       <div class="col-9">
         <div class="poster">
-          <img src="../assets/bohemian.jpg" > 
-          <a class="btn play" href="#"><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#f4f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z" fill="#fbf7f7" opacity="1" stroke-width="0"></path><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg></a>
-          
+          <img class="card-image" :src="getPicPortada()"> 
+          <buttom v-on:click=reproducirPeli class="btn play" href="#"><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#f4f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z" fill="#fbf7f7" opacity="1" stroke-width="0"></path><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg></buttom>
+
         </div>
 
         <div class="row">
           <div class="col titulo">  
-            <h2 class="tituloElemento">Bohemian Rhapsody</h2>
+            <h2 class="tituloElemento">{{pelicula.title}}</h2>
             <div class="yearDuration">
-              <h4>2018</h4> &ensp;&bull;&ensp;
-              <h4>2h 41 min</h4>
+              <h4>{{pelicula.year}}</h4> &ensp;&bull;&ensp;
+              <h4>{{pelicula.runtime}} min</h4>
             </div>
             
           <div class="col generos"> 
-            <a class="btn btn-lg btn-secondary" href="#">Drama</a>
-            <a class="btn btn-lg btn-secondary" href="#">Musica</a> 
+            <a class="btn btn-lg btn-secondary" href="#">{{pelicula.genre[0]}}</a>
+            <a class="btn btn-lg btn-secondary" href="#">{{pelicula.genre[1]}}</a> 
           </div>
             
           </div>
           <div class="col mando"> 
-            <a class="btn mando" href="#">Mando</a>
+            <buttom class="btn mando" href="#">Mando</buttom>
           </div>
 
 
          <h3 class="titloDescripcion">Descripcion</h3>
-         <p>Londres, 1970. El joven Farrokh, Freddie para los amigos, trabaja en el aeropuerto, estudia diseño gráfico y escribe canciones. 
-           Un día, tras escuchar al grupo Smile en un bar, se ofrece como cantante de la banda al enterarse de que se han quedado sin vocalista. </p>
+         <p>{{pelicula.plot}} </p>
         </div>
         <br>
         
-        
-        <div class="reparto">
+<div class="reparto">
           <h3 class="titloDescripcion">Reparto</h3>
           <div class="row">
-            <div class="col">
+            <div class="col" v-for="item in pelicula.actores" :key="item.id">
               <div class="elenco">
-                <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                <div class="titlePoster">Rami Maleck</div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="elenco">
-                <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                <div class="titlePoster">Lucy Boyton</div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="elenco">
-                <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                <div class="titlePoster">Ben Hardy</div>
-              </div>
-            </div>
-            
-            <div class="col">
-              <div class="elenco">
-                <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                <div class="titlePoster">Joseph Mzzello</div>
-              </div>
-            </div>
-
-            
-            <div class="col">
-              <div class="elenco">
-                <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                <div class="titlePoster">Aidan Gillen</div>
+                 <img class="card-image" :src="getPic(item)"> 
+                <div class="titlePoster">{{item.nombre}}</div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>        
+
 
     <div class="col">
         <h3 class="titloRecomendaciones">Similares</h3>
@@ -132,52 +108,36 @@
 </template>
 
 <script>
-import { pruebaa }  from '../main.js';
+import { obtenerPeliculasInfo, reproducirPeli }  from '../api.js';
 
 export default{
-    name:"MandoKoice",
-     data(){
-       return{
-        peliculas:null,
-        cosa:null,
-        idPelicula:null,
-      }
-    },
-    methods: {
-        async algo(){
-          const response = await fetch('http://127.0.0.1:5000/');
-          const body = await response.text();
-          return body['result'];
+  name:"MandoKoice",
+  data () {
+    return {
+      id: 0,
+      msg: 'Hey Nic Raboy',
+      pelicula: null
+    }
+  },
+      methods: {
+        getPic(actor) {
+          return actor.foto;
         },
-        getPic(peliculas) {
-          return peliculas.poster;
+        getPicPortada() {
+          return this.pelicula.poster;
         },
-        pelicu(idPeli){
-          this.cosa=idPeli;
-          
-          console.log('cosa',this.cosa);
+        async obtenerPelisInfo(id){
+          this.pelicula=await obtenerPeliculasInfo(id);
         },
-        async obtenerPelis(){
-          this.peliculas=await pruebaa();
-        },
-        peliUso(){
-          this.idPelicula=this.cosa;
+        async reproducirPeli(){
+          await reproducirPeli(this.id);
         }
     },
+  created() {
+    this.id = this.$route.params.id;
+    console.log(this.id);
+    this.obtenerPelisInfo(this.id);
+  },
 
-    beforeCreate() {
-      console.log('No se ha ejecutado nada todavía')
-    },
-    created() {
-    console.log("Componentes cargados"),
-    this.obtenerPelis();
-    }, 
-    mounted() {
-      console.log(this.$el.querySelectorAll('a'));
-    },
-    updated() {
-      console.log("Componente actualizado");
-    }
-};
-
+}
 </script>

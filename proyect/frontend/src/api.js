@@ -13,3 +13,14 @@ export async function obtenerSeries(){
     return body['result']['tvshows'];
   
 }
+
+export async function obtenerPeliculasInfo(idPeli){
+    const response = await fetch("http://127.0.0.1:5000/kodi/pelidetalles/"+idPeli)
+    const body = await response.json()
+    return body['result']['moviedetails'];
+  
+}
+
+export async function reproducirPeli(idPeli){
+    await fetch("http://127.0.0.1:5000/kodi/play/peli/"+idPeli)
+}

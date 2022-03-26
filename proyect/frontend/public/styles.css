@@ -3,6 +3,12 @@
   font-family: 'Inter', sans-serif;
 }
 
+.asdfasf{
+  height: 30px;
+  width: 30px;
+  
+}
+
 #app {
   text-align: center;
   font-weight: bold;
@@ -167,12 +173,18 @@ li {
   width: 210px;
   height: 300px;
   position: relative;
+  display: flex;
+  align-items: center;
+  
 }
 
 .col{
   padding-top: 50px;
   margin-block-end: 70px;
+  
 }
+
+
 
 .form-control{
   color: #6247AA !important;
@@ -296,7 +308,7 @@ p{
 .poster .btn.play{
   background-color: #6644B8;
   position: absolute;
-  top: 45%;
+  top: 20%;
   left: 36%;
   height: 100px;
   width: 100px;
@@ -484,19 +496,6 @@ p{
   justify-content: center;
 }
 
-.col.controls{
-  width: 400px;
-  height: 400px;
-  background-color: white;
-  border-radius:50px;
-  border: #E5E5E5;
-  box-shadow: 0px 5px 5px rgb(142, 117, 170);
-  background-color: rgba(189, 208, 252, 0.15);
-  background-color: #F1F0FC;
-  margin: 0 auto;
-  margin-top: 3%;
-} 
-
 .mando .row .col{
   align-items: center;
 }
@@ -552,20 +551,42 @@ p{
 }
 
 .chevronUp{
-  background-color: blue;
+  position: absolute;
+  bottom: 75%;
+  left: 40%;
+
   
 }
 
+.col.controls{
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border-radius:50px;
+  border: #E5E5E5;
+  box-shadow: 0px 5px 5px rgb(142, 117, 170);
+  background-color: rgba(189, 208, 252, 0.15);
+  background-color: #F1F0FC;
+  margin: 0 auto;
+  margin-top: 3%;  
+  position: relative;
+
+
+} 
 
 .pasarSiguiente{
-  background-color: red;
+  position: absolute;
+  left: 7%;
+  bottom: 37%;
 }
 
-
 .volverAtras{
-  background-color: green;
+  position: absolute;
+  left:75%;
+  bottom: 37%;
 }
 
 .chevronDown{
-  background-color: grey;
-}
+  position: absolute;
+  left: 40%;
+} 
