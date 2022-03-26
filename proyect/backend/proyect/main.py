@@ -72,9 +72,9 @@ def kodi_series():
     return jsonify(series)
 
 @app.route("/kodi/series/<int:serie_id>", methods=['GET', 'POST'])
-def kodi_series_capitulos(serie_id):
+def kodi_series_temporadas(serie_id):
     print(serie_id)
-    series=kodi.obtenerSerieCapitulos(serie_id)
+    series=kodi.obtenerSerieTemporadas(serie_id)
     return jsonify(series)
 
 @app.route("/kodi/play/serie/<int:serie_id>", methods=['GET', 'POST'])
@@ -87,6 +87,11 @@ def kodi_play_series_id(serie_id):
     #peli=pelis[peli_id]
     kodi.reproducirSeries(serie_id, token)
     return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK', 'serie_id': movies})
+
+@app.route("/kodi/seriedetalles/<int:serie_id>", methods=['GET', 'POST'])
+def kodi_serie_detalles(serie_id):
+    serie=kodi.obtenerSerieDetalles(serie_id)
+    return jsonify(serie)
 
 @app.route("/kodi/play_pause", methods=['GET', 'POST'])
 def kodi_play_pausa():

@@ -21,6 +21,12 @@ export async function obtenerPeliculasInfo(idPeli){
   
 }
 
+export async function obtenerSeriesInfo(idSerie){
+    const response = await fetch("http://127.0.0.1:5000/kodi/seriedetalles/"+idSerie)
+    const body = await response.json()
+    return body['result']['tvshowdetails'];
+}
+
 export async function reproducirPeli(idPeli){
     await fetch("http://127.0.0.1:5000/kodi/play/peli/"+idPeli)
 }

@@ -27,6 +27,11 @@ const routes = [
         component: () => import('./components/InformacionElemento.vue')
     },
     {
+      path: '/informacionSeries/:id',
+      name: 'informacionSeries',
+      component: () => import('./components/InformacionSeries.vue')
+    },
+    {
         path:'',
         component: () => import('./components/PeliculasKoice.vue')
     }

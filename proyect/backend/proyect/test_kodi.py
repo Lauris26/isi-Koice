@@ -1,5 +1,5 @@
 import unittest
-import kodi
+import kodiApi as kodi
 
 IP_KODI="127.0.0.1"
 PORT_KODI=10080
@@ -30,12 +30,17 @@ class TestKodi(unittest.TestCase):
         self.assertNotEqual(library, None, "Should be not None")
     '''
     
-    def test_kodi_obtenerSerieCapitulos(self):
-        library=self.my_kodi.obtenerSerieCapitulos(1)
+    def test_kodi_obtenerSerieTemporadas(self):
+        library=self.my_kodi.obtenerSerieTemporadas(1)
         print(library)
         primer_elemento = list(library)[0]
         print(primer_elemento)
         self.assertNotEqual(primer_elemento, 'error', "Should be not None")
+
+    def test_kodi_obtenerSerieDetalles(self):
+        library=self.my_kodi.obtenerSerieDetalles(1)
+        print(library)
+        self.assertNotEqual(library, None, "Should be not None")
     '''
     
     def test_kodi_obtenerSerieDetalles(self):

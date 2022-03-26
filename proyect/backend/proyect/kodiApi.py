@@ -1,6 +1,6 @@
 import json
 from kodipydent import Kodi # type: ignore
-from imdbApi import obtenerPortada, obtenerActoresPeli
+from imdbApi import obtenerPortada, obtenerActoresPeli, obtenerPortadaTemporada
 
 
 class KodiAPI:
@@ -39,6 +39,19 @@ class KodiAPI:
 
         return dicVideo
 
+    def addPortadaTemporada(self, dicTemporada):
+        lisTemporada=[]
+        for i, temp in enumerate(dicTemporada['result']['tvshowdetails']):
+            dicTemporada={
+                'id': i,
+                'poster': obtenerPortadaTemporada(temp['label']),
+                'titulo': temp['label']
+            }
+            lisTemporada.append(dicTemporada)
+        dicTemporada['result']['seasons']=lisTemporada
+
+        return dicTemporada
+
     def addActores(self, dicciPelis):
         #print(dicciPelis)
         dicciPelis['result']['moviedetails']['poster']=obtenerPortada(dicciPelis['result']['moviedetails']['title'])
@@ -60,6 +73,12 @@ class KodiAPI:
         dicciPelis['result']['moviedetails']=lisPelis
         '''
         return dicciPelis
+
+    def addActoresSerie(self, dicciSeries):
+        dicciSeries['result']['tvshowdetails']['poster']=obtenerPortada(dicciSeries['result']['tvshowdetails']['title'])
+        dicciSeries['result']['tvshowdetails']['actores']=obtenerActoresPeli(dicciSeries['result']['tvshowdetails']['title'])
+        dicciSeries['result']['tvshowdetails']['seasons']=self.obtenerSerieTemporadas(dicciSeries['result']['tvshowdetails']['tvshowid'])['result']['seasons']
+        return dicciSeries
         
     def obtenerToken(self):
         return self.my_kodi.Application.GetProperties()
@@ -107,7 +126,7 @@ class KodiAPI:
         #return self.my_kodi.VideoLibrary.GetTVShows()
         return self.addPortadaSerie(self.my_kodi.VideoLibrary.GetTVShows())
 
-    def obtenerSerieCapitulos(self, idSerie):
+    def obtenerSerieTemporadas(self, idSerie):
         #serie={'tvshowid':idSerie}
         #serie={'tvshowid':idSerie, 'season':1}
         #return self.my_kodi.VideoLibrary.GetEpisodes(item=serie)
@@ -115,7 +134,7 @@ class KodiAPI:
         #return self.my_kodi.VideoLibrary.GetEpisodes(tvshowid=3, properties=["title", "rating"])
 
     def obtenerSerieDetalles(self, idSerie):
-        return self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "playcount", "runtime", "director", "plot", "rating", "votes", "lastplayed", "writer", "firstaired", "productioncode", "season", "episode", "originaltitle", "thumbnail", "fanart", "art", "resume", "userrating", "ratings", "dateadded", "uniqueid"])
+        return self.addActoresSerie(self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "year", "plot", "season", "episode", "genre"]))
 
     def obtenerSeriesFiltro(self, filtro):
         print(filtro)
@@ -136,7 +155,7 @@ class KodiAPI:
         #my_kodi.Player.Open(item=peli)
 
     def reproducirSeries(self, idSerie, token):
-        serie={'tvshowid':idSerie}
+        serie={'tvshowid':idSerie, "seasonid":3}
         self.my_kodi.Player.Open(item=serie)
         {'id': token, 'jsonrpc': '2.0', 'result': 'OK'}
 

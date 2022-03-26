@@ -1,47 +1,54 @@
 <template>
+
 <div class="containerInformacion">
-<div class="hello">
-    </div>
-
-
     <div class="row informacion">
       <div class="col-9">
         <div class="poster">
           <img class="card-image" :src="getPicPortada()"> 
-          <buttom v-on:click=reproducirPeli class="btn play" href="#"><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#f4f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z" fill="#fbf7f7" opacity="1" stroke-width="0"></path><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg></buttom>
-
+          <button class="btn play" ><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#f4f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z" fill="#fbf7f7" opacity="1" stroke-width="0"></path><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg></button>
         </div>
 
         <div class="row">
           <div class="col titulo">  
-            <h2 class="tituloElemento">{{pelicula.title}}</h2>
+            <h2 class="tituloElemento">{{serie.title}}</h2>
             <div class="yearDuration">
-              <h4>{{pelicula.year}}</h4> &ensp;&bull;&ensp;
-              <h4>{{pelicula.runtime}} min</h4>
-            </div>
-            
+              <h4>{{serie.year}}</h4> &ensp;&bull;&ensp;
+              <h4>{{serie.season}} temporadas</h4>
+            </div>     
+
           <div class="generos">
           <h3 class="titloDescripcion">Generos</h3>
           <div class="col generos"> 
-            <a class="btn btn-lg btn-secondary" v-for="item in pelicula.genre" :key="item.id">{{item}}</a>
+            <a class="btn btn-lg btn-secondary" v-for="item in serie.genre" :key="item.id">{{item}}</a>
           </div>
           </div>
             
           </div>
           <div class="col mando"> 
-            <buttom class="btn mando" href="#">Mando</buttom>
+            <button class="btn mando"> Mando</button>
           </div>
 
 
          <h3 class="titloDescripcion">Descripcion</h3>
-         <p>{{pelicula.plot}} </p>
+         <p>{{serie.plot}}</p>
         </div>
         <br>
+
+        <div class="reparto">
+          <h3 class="titloDescripcion">Temporadas</h3>
+          <div class="row">
+            <ul class="list-group">
+              <div class="col" v-for="item in serie.seasons" :key="item.id">
+              <li class="list-group-item">{{item.label}}</li>
+            </div>
+            </ul>
+          </div>
+        </div>
         
-<div class="reparto">
+        <div class="reparto">
           <h3 class="titloDescripcion">Reparto</h3>
           <div class="row">
-            <div class="col" v-for="item in pelicula.actores" :key="item.id">
+            <div class="col" v-for="item in serie.actores" :key="item.id">
               <div class="elenco">
                  <img class="card-image" :src="getPic(item)"> 
                 <div class="titlePoster">{{item.nombre}}</div>
@@ -49,8 +56,7 @@
             </div>
           </div>
         </div>
-      </div>        
-
+      </div>
 
     <div class="col">
         <h3 class="titloRecomendaciones">Similares</h3>
@@ -102,13 +108,11 @@
           </div>        
       </div> 
     </div>
-    
   </div>
-
 </template>
 
 <script>
-import { obtenerPeliculasInfo, reproducirPeli }  from '../api.js';
+import { obtenerSeriesInfo }  from '../api.js';
 
 export default{
   name:"MandoKoice",
@@ -116,7 +120,7 @@ export default{
     return {
       id: 0,
       msg: 'Hey Nic Raboy',
-      pelicula: null
+      serie: null
     }
   },
       methods: {
@@ -124,20 +128,16 @@ export default{
           return actor.foto;
         },
         getPicPortada() {
-          return this.pelicula.poster;
+          return this.serie.poster;
         },
-        async obtenerPelisInfo(id){
-          this.pelicula=await obtenerPeliculasInfo(id);
-        },
-        async reproducirPeli(){
-          await reproducirPeli(this.id);
+        async obtenerSerieInfo(id){
+          this.serie=await obtenerSeriesInfo(id);
         }
     },
   created() {
     this.id = this.$route.params.id;
     console.log(this.id);
-    this.obtenerPelisInfo(this.id);
+    this.obtenerSerieInfo(this.id);
   },
-
 }
 </script>
