@@ -4,23 +4,21 @@
     <div class="row informacion">
       <div class="col-9">
         <div class="poster">
-          <img src="../assets/bohemian.jpg" > 
+          <img src="https://static3.elnortedecastilla.es/www/multimedia/201910/11/media/cortadas/suitsbuena-kJiH-U903760469145RG-1248x770@El%20Norte.jpg" > 
           <button class="btn play" ><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#f4f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z" fill="#fbf7f7" opacity="1" stroke-width="0"></path><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg></button>
         </div>
 
         <div class="row">
           <div class="col titulo">  
-            <h2 class="tituloElemento">Bohemian Rhapsody</h2>
+            <h2 class="tituloElemento">Suits</h2>
             <div class="yearDuration">
-              <h4>2018</h4> &ensp;&bull;&ensp;
-              <h4>2h 41 min</h4>
+              <h4>2019</h4> &ensp;&bull;&ensp;
+              <h4>6 temporadas</h4>
             </div>
             
           <div class="col generos"> 
-            <a class="btn btn-lg btn-secondary" href="#">Drama</a>
-            <a class="btn btn-lg btn-secondary" href="#">Musica</a> 
-            <a class="btn btn-lg btn-secondary" href="#">Drama</a>
-            <a class="btn btn-lg btn-secondary" href="#">Musica</a> 
+            <a class="btn btn-lg btn-secondary" href="#">Comedia</a>
+            <a class="btn btn-lg btn-secondary" href="#">Drama</a> 
           </div>
             
           </div>
@@ -35,24 +33,23 @@
         </div>
         <br>
 
-        <div class="reparto">
+        <div class="temporadas">
           <h3 class="titloDescripcion">Temporadas</h3>
           <div class="row">
-            <div class="col" v-for="item in peliculas2" :key="item.id">
-              <div class="elenco">
-                 <img class="card-image" :src="getPic(item)"> 
-                <div class="titlePoster">{{item.titulo}}</div>
-              </div>
+            <ul class="list-group">
+              <div class="col" v-for="item in similaresSeriess" :key="item.id">
+              <li class="list-group-item">Temporada {{item.id }}</li>
             </div>
+            </ul>
           </div>
         </div>
         
         <div class="reparto">
           <h3 class="titloDescripcion">Reparto</h3>
           <div class="row">
-            <div class="col" v-for="item in peliculas2" :key="item.id">
+            <div class="col" v-for="item in repartoActores" :key="item.id">
               <div class="elenco">
-                 <img class="card-image" :src="getPic(item)"> 
+                 <img class="card-image" :src="getPhoto(item)"> 
                 <div class="titlePoster">{{item.titulo}}</div>
               </div>
             </div>
@@ -61,80 +58,48 @@
       </div>
 
     <div class="col">
-        <h3 class="titloRecomendaciones">Similares</h3>
+       <h3 class="titloRecomendaciones">Similares</h3>
           <div class="recomendaciones">
             
               <div class="row">
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
+                <div class="col" v-for="item in similaresSeriess" :key="item.id" >
+                  
+                  <div class="elementoRecomendacion" >
+                    <img class="card-image" :src="getPoster(item)">
+                    <div class="titlePoster">{{item.titulo}}</div>
                   </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
                   </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>       
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>
-                </div>
+                
               </div>
-          </div>        
+          </div>    
       </div> 
     </div>
   </div>
 </template>
 
 <script>
-import {obtenerPelis}  from '../main.js';
+import {similaresSeries, reparto }  from '../main.js';
 export default{
-  name:"MandoKoice",
+  name:"InformacionSeries",
   data () {
     return {
-      peliculas2 : [],
       id: 0,
-      msg: 'Hey Nic Raboy'
+      repartoActores: [],
+      similaresSeriess: []
     }
   },
   methods: {
-    getPic(peliculas2) {
-      return peliculas2.poster;
+    getPoster(serie) {
+      return serie.poster;
     },
-    pelisC(){
-      this.peliculas2 = obtenerPelis();
+    getPhoto(nombre){
+      return nombre.foto;
     },
   },
   created() {
-    this.pelisC();
     this.id = this.$route.params.id;
+    this.similaresSeriess = similaresSeries();
+    this.repartoActores = reparto();
   },
 }
 </script>

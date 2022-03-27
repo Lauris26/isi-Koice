@@ -5,35 +5,18 @@
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/gameofthrones.jpg">
+          <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/blackMirror.jpg">
           <div class="container">
             <div class="carousel-caption text-start">
-              <h1>Juego de tronos</h1>
-              <p>Es la descripción de dos familias poderosas, reyes y reinas, caballeros y renegados, 
-                hombres falsos y honestos, haciendo parte de un juego mortal por el control de los Siete 
-                Reinados de Westeros y por sentarse en el trono más alto. Martin es el co productor ejecutivo 
-                y uno de los escritores de la serie que fue filmada en el Norte de Irlanda y Malta.</p>
-               <p><a class="btn btn-lg btn-primary" href="#">Ver serie</a></p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="carousel-item">
-          <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/walkingdead.jpg">
-          <div class="container">
-            <div class="carousel-caption text-start">
-              <h1>The walking dead</h1>
-              <p>Este drama crudo describe las vidas de un grupo de sobrevivientes que está siempre en 
-                  movimiento en busca de un hogar seguro durante las semanas y meses de un apocalipsis zombi. 
-                  Sin embargo, la presión de estar con vida cada día, lleva a algunos del grupo a la crueldad 
-                  profunda de cada ser humano y descubren que el miedo abrumador puede ser más mortal que los zombis 
-                  que caminan a su alrededor. Los conflictos interpersonales pueden representar una amenaza mayor para
-                  su supervivencia que los caminantes que deambulan por las calles.</p>
-              <p><a class="btn btn-lg btn-primary" href="#">Ver serie</a></p>
+              <h1>Black Mirror</h1>
+              <p>El lado oscuro de la era tecnológica en la que se vive: la paranoia de ser vigilados como en un 
+                panóptico, los usos terroristas de las nuevas herramientas y su relación con la experiencia cotidiana.</p>
+               <router-link :to="{ name: 'informacionSeries', params: {id: 1}}" class="nav-link px-2 link-dark">  
+                <button class="btn btn-lg btn-primary" >Mas informacion</button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -45,7 +28,9 @@
               <h1>El juego del calamar</h1>
               <p>Cientos de personas con dificultades económicas aceptan una extraña invitación a un juego 
                   de supervivencia. Les espera un premio millonario, pero hay mucho en juego.</p>
-              <p><a class="btn btn-lg btn-primary" href="#">Ver serie</a></p>
+              <router-link :to="{ name: 'informacionSeries', params: {id: 2}}" class="nav-link px-2 link-dark">  
+                <button class="btn btn-lg btn-primary" >Mas informacion</button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -68,7 +53,7 @@
           <div class="elementoPelicula">
              <router-link :to="{ name: 'informacionSeries', params: { id: item.id } }" class="nav-link px-2 link-dark">
              <img class="card-image" :src="getPic(item)"> 
-             <div class="titlePoster">{{item.titulo}}</div>
+             <div class="ActorNombre">{{item.titulo}}</div>
              </router-link>
             </div>
           </div>
@@ -76,12 +61,10 @@
       </div>
     </div>
   </div>
-
 </template>
 
-
 <script>
-import { obtenerPelis}  from '../main.js';
+import { similaresPelis}  from '../main.js';
 
 export default{
   name:"SeriesKoice",
@@ -95,7 +78,7 @@ export default{
       return peliculas2.poster;
     },
     pelisC(){
-      this.peliculas2 = obtenerPelis();
+      this.peliculas2 = similaresPelis();
     },
   },
   created() {

@@ -1,5 +1,4 @@
 <template>
-
     <div class="mando">
         <div class="row">
             <div class="col settings">
@@ -15,7 +14,7 @@
                         </a>
                     </div>
                     <div class="row">
-                        <a class="btn btn-lg btn-secondary" href="#">
+                        <a class="btn btn-lg btn-secondary" >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#807e81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="11.99" y1="7" x2="12.01" y2="7" stroke-linecap="round"></line><line x1="12" y1="11" x2="12" y2="17"></line></svg>
                         </a>
                     </div>
@@ -28,9 +27,9 @@
             </div>
             <div class="col controls">
                 <div class="play">
-                    <a class="btn btn-lg btn-secondary" href="#">
+                    <button class="boton-play">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="84" height="84" fill="none" stroke="#957fb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5,5.74V18.26a2,2,0,0,0,3.11,1.67l9.39-6.27a2,2,0,0,0,0-3.32L8.11,4.07A2,2,0,0,0,5,5.74Z"></path></svg>
-                    </a>
+                    </button>
                 </div>
                 <svg class="chevronUp" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="84" height="84" fill="none" stroke="#957fb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 14 12 9 7 14"></polyline></svg>
                 <svg class="pasarSiguiente" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="84" height="84" fill="none" stroke="#957fb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="4" y2="4"></line><path d="M20,17.34V6.66A2,2,0,0,0,16.92,5l-8.3,5.34a2,2,0,0,0,0,3.36L16.92,19A2,2,0,0,0,20,17.34Z"></path></svg>
