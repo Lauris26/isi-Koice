@@ -25,7 +25,9 @@
             
           </div>
           <div class="col mando"> 
+            <router-link to="/mando" class="nav-link px-2 link-dark"> 
             <button class="btn mando"> Mando</button>
+            </router-link>
           </div>
 
 
