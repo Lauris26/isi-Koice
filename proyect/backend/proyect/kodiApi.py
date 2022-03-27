@@ -1,4 +1,3 @@
-import json
 from kodipydent import Kodi # type: ignore
 from imdbApi import obtenerPortada, obtenerActoresPeli, obtenerPortadaTemporada
 
@@ -10,8 +9,6 @@ class KodiAPI:
 
         #Login with default kodi/kodi credentials
         self.my_kodi=Kodi(ip, port=port1)
-        #self.my_kodi=None
-        #print(type(self.my_kodi))
 
     def addPortada(self, dicciPelis):
         lisPelis=[]
@@ -39,39 +36,10 @@ class KodiAPI:
 
         return dicVideo
 
-    def addPortadaTemporada(self, dicTemporada):
-        lisTemporada=[]
-        for i, temp in enumerate(dicTemporada['result']['tvshowdetails']):
-            dicTemporada={
-                'id': i,
-                'poster': obtenerPortadaTemporada(temp['label']),
-                'titulo': temp['label']
-            }
-            lisTemporada.append(dicTemporada)
-        dicTemporada['result']['seasons']=lisTemporada
-
-        return dicTemporada
-
     def addActores(self, dicciPelis):
-        #print(dicciPelis)
         dicciPelis['result']['moviedetails']['poster']=obtenerPortada(dicciPelis['result']['moviedetails']['title'])
         dicciPelis['result']['moviedetails']['actores']=obtenerActoresPeli(dicciPelis['result']['moviedetails']['title'])
         dicciPelis['result']['moviedetails']['runtime']=int(dicciPelis['result']['moviedetails']['runtime']/60)
-        '''
-        lisPelis=[]
-        for peli in dicciPelis['result']['moviedetails']:
-            dicPelis={
-                'id': peli['movieid'],
-                'poster': obtenerPortada(peli['label']),
-                'titulo': peli['label'],
-                'resumen': peli['plot'],
-                'tiempo' : peli['runtime'],
-                'generos': peli['genre'],
-                'actores': obtenerActores(peli['label'])
-            }
-            lisPelis.append(dicPelis)
-        dicciPelis['result']['moviedetails']=lisPelis
-        '''
         return dicciPelis
 
     def addActoresSerie(self, dicciSeries):
@@ -98,40 +66,20 @@ class KodiAPI:
         return self.addPortada(self.my_kodi.VideoLibrary.GetMovies())
 
     def obtenerPeliDetalles(self, idPeli):
-        #return self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "playcount", "runtime", "director", "studio", "year", "plot", "genre", "rating", "mpaa", "imdbnumber", "votes", "lastplayed", "originaltitle", "trailer", "tagline", "plotoutline", "writer", "country", "top250", "sorttitle", "set", "showlink", "thumbnail", "fanart", "tag", "art", "resume", "userrating", "ratings", "dateadded", "premiered", "uniqueid"])
-        #return self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"])
         return self.addActores(self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"]))
 
     def obtenerPelisFiltro(self, filtro):
-        pelis=self.my_kodi.VideoLibrary.GetGenres(type='movie')
-        print(pelis)
-        #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "title", "value": "A"})
-
-        #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "title", "value": "A"}, sort={"method": "label", "order": "descending"})
-
-        #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "title", "value": "Avatar"}, properties=["title", "thumbnail", "imdbnumber", "year", "plot", "rating", "genre"])
-
-        #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "startswith", "field": "title", "value": "A"}, properties=[ "year", "rating", "genre"])
-
-        #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"or": [{"operator": "startswith", "field": "title", "value": "A"}, {"operator": "startswith", "field": "title", "value": "The A"}]}, properties=["year", "rating", "genre"])
-
-        #peliFil=my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "year", "value": "2009"}, properties=["year", "rating", "genre"])
-
-        peliFil=self.my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "genre", "value": filtro}, properties=["year", "rating", "genre"])
+        #pelis=self.my_kodi.VideoLibrary.GetGenres(type='movie')
+        peliFil=self.my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "genre", "value": filtro}, properties=["title", "runtime", "year", "plot", "genre"])
 
         return peliFil
 
 
     def obtenerSeries(self):
-        #return self.my_kodi.VideoLibrary.GetTVShows()
         return self.addPortadaSerie(self.my_kodi.VideoLibrary.GetTVShows())
 
     def obtenerSerieTemporadas(self, idSerie):
-        #serie={'tvshowid':idSerie}
-        #serie={'tvshowid':idSerie, 'season':1}
-        #return self.my_kodi.VideoLibrary.GetEpisodes(item=serie)
         return self.my_kodi.VideoLibrary.GetSeasons(tvshowid=idSerie)
-        #return self.my_kodi.VideoLibrary.GetEpisodes(tvshowid=3, properties=["title", "rating"])
 
     def obtenerSerieDetalles(self, idSerie):
         return self.addActoresSerie(self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "year", "plot", "season", "episode", "genre"]))
@@ -140,19 +88,8 @@ class KodiAPI:
         print(filtro)
         return self.my_kodi.VideoLibrary.GetTVShows(filter={"operator": "contains", "field": "genre", "value": filtro}, properties=["title", "thumbnail", "imdbnumber", "year", "plot", "rating", "genre"])
 
-    #my_kodi.Player.Open(item={'movieid':1})
-    #{'id': '5ab9dab104304ed28268fc1c53f846f4', 'jsonrpc': '2.0', 'result': 'OK'}
-    def reproducirPelisOLD(self, idPeli, token):
-        peli={'movieid':idPeli}
-        self.my_kodi.Player.Open(item=peli)
-        {'id': token, 'jsonrpc': '2.0', 'result': 'OK'}
-
-    def reproducirPelis(self, idPeli, token):
-        #peli={'movieid':idPeli}
-        #my_kodi.Player.Open(item=peli)
+    def reproducirPelis(self, idPeli):
         self.my_kodi.Player.Open(item={'movieid':idPeli})
-        #peli={'label': 'Avatar'}
-        #my_kodi.Player.Open(item=peli)
 
     def reproducirSeries(self, idSerie, token):
         serie={'tvshowid':idSerie, "seasonid":3}
@@ -162,16 +99,14 @@ class KodiAPI:
     def cambiarVolumen(self, vol):
         self.my_kodi.Application.SetVolume(volume=vol)
 
-    #my_kodi.Input.ExecuteAction("back")
-    def ejecutarComando(self, comando):
-        self.my_kodi.Input.ExecuteAction(action=comando)
-
-    #PlayPause(playerid[, username, password, play])
     def playPause(self):
         self.my_kodi.Player.PlayPause(playerid=1,play='toggle')
 
-    #Stop(playerid[, username, password])
     def stop(self):
         self.my_kodi.Player.Stop(playerid=1)
+
+    #my_kodi.Input.ExecuteAction("back")
+    def ejecutarComando(self, comando):
+        self.my_kodi.Input.ExecuteAction(action=comando)
 
 

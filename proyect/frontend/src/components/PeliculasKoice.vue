@@ -13,45 +13,50 @@
         <div class="container">
           <div class="carousel-caption text-start">
             
-            <h1>Avatar</h1>
-            <p>En un exuberante planeta llamado Pandora viven los Na'vi, seres que aparentan 
-              ser primitivos pero que en realidad son muy evolucionados. Debido a que el ambiente 
-              de Pandora es venenoso, los híbridos humanos/Na'vi, llamados Avatares, están relacionados 
-              con las mentes humanas, lo que les permite moverse libremente por Pandora. Jake Sully, un
-               exinfante de marina paralítico se transforma a través de un Avatar, y se enamora de una mujer Na'vi.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Ver pelicula</a></p>
+              <h1>Avatar</h1>
+              <p>En un exuberante planeta llamado Pandora viven los Na'vi, seres que aparentan 
+                ser primitivos pero que en realidad son muy evolucionados. Debido a que el ambiente 
+                de Pandora es venenoso, los híbridos humanos /Na'vi, llamados Avatares, están relacionados 
+                con las mentes humanas, lo que les permite moverse libremente por Pandora. Jake Sully, un
+                exinfante de marina paralítico se transforma a través de un Avatar, y se enamora de una mujer Na'vi.</p>
+              <router-link :to="{ name: 'informacion', params: {id: 1}}" class="nav-link px-2 link-dark">
+                <button class="btn btn-lg btn-primary" >Mas informacion</button>
+              </router-link>
+            </div>
           </div>
         </div>
-      </div>
       
-      <div class="carousel-item">
-        <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/parasites.png">
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Parasitos</h1>
-            <p>Tanto Gi Taek como su familia están sin trabajo. Cuando su hijo mayor, Gi Woo, empieza a 
-              recibir clases particulares en la adinerada casa de Park, las dos familias, que tienen mucho 
-              en común pese a pertenecer a dos mundos totalmente distintos, comienzan una relación de resultados 
-              imprevisibles.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Ver pelicula</a></p>
+        <div class="carousel-item">
+        <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/vengadores.jpg">
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <h1>Los vengadores</h1>
+              <p>El director de la Agencia SHIELD decide reclutar a un equipo para salvar al mundo de un desastre 
+                casi seguro cuando un enemigo inesperado surge como una gran amenaza para la seguridad mundial.</p>
+              <router-link :to="{ name: 'informacion', params: {id: 2}}" class="nav-link px-2 link-dark">  
+                <button class="btn btn-lg btn-primary" >Mas informacion</button>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="carousel-item">
-      <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/batman.jpg">
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>The Batman</h1>
-            <p>En su segundo año luchando contra el crimen, Batman explora la corrupción 
-              existente en la ciudad de Gotham y el vínculo de esta con su propia familia. 
-              Además, entrará en conflicto con un asesino en serie conocido como "el Acertijo".</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Ver pelicula</a></p>
+        <div class="carousel-item">
+          <img class="bd-placeholder-img" width="100%" height="100%" src="../assets/parasites.png">
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <h1>Parasitos</h1>
+              <p>Tanto Gi Taek como su familia están sin trabajo. Cuando su hijo mayor, Gi Woo, empieza a 
+                recibir clases particulares en la adinerada casa de Park, las dos familias, que tienen mucho 
+                en común pese a pertenecer a dos mundos totalmente distintos, comienzan una relación de resultados 
+                imprevisibles.</p>
+              <router-link :to="{ name: 'informacion', params: {id: 3}}" class="nav-link px-2 link-dark">  
+                <button class="btn btn-lg btn-primary" href="#">Mas informacion</button>
+              </router-link>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    
+
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
@@ -61,9 +66,6 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
-<button v-on:click=pelicu(1)></button>
-<h2 >{{cosa}}</h2>
 
 <div class="album">
     <div class="container">

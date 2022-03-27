@@ -51,53 +51,19 @@
         </div>
       </div>        
 
-
     <div class="col">
         <h3 class="titloRecomendaciones">Similares</h3>
           <div class="recomendaciones">
             
               <div class="row">
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
+                <div class="col" v-for="item in similaresPeliculas" :key="item.id" >
+                  
+                  <div class="elementoRecomendacion" >
+                    <img class="card-image" :src="getPoster(item)">
+                    <div class="titlePoster">{{item.titulo}}</div>
                   </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
                   </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>       
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="elementoRecomendacion">
-                    <img class="card-image" src="https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg">
-                    <div class="titlePoster">Avengers: Endgame</div>
-                  </div>
-                </div>
+                
               </div>
           </div>        
       </div> 
@@ -109,17 +75,21 @@
 
 <script>
 import { obtenerPeliculasInfo, reproducirPeli }  from '../api.js';
+import {similaresPelis}  from '../main.js';
 
 export default{
   name:"MandoKoice",
   data () {
     return {
       id: 0,
-      msg: 'Hey Nic Raboy',
+      similaresPeliculas: [],
       pelicula: null
     }
   },
       methods: {
+        getPoster(pelicula) {
+      return pelicula.poster;
+    },
         getPic(actor) {
           return actor.foto;
         },
@@ -137,6 +107,7 @@ export default{
     this.id = this.$route.params.id;
     console.log(this.id);
     this.obtenerPelisInfo(this.id);
+    this.similaresPeliculas = similaresPelis();
   },
 
 }
