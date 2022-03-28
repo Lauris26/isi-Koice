@@ -1,11 +1,12 @@
-from tokenize import Pointfloat
+from flask_cors import CORS
 from flask import Flask, jsonify, request
-from kodi import KodiAPI
+from kodiApi import KodiAPI
 #import kodi
 import json
 import controlVoz
 
 app = Flask(__name__)
+CORS(app)
 
 IP_KODI="127.0.0.1"
 PORT_KODI=10080
@@ -55,15 +56,10 @@ def kodi_pelis_filtro(filtro):
 
 @app.route("/kodi/play/peli/<int:peli_id>", methods=['GET', 'POST'])
 def kodi_play_pelis_id(peli_id):
-    pelis=kodi.obtenerPelis()
-    token=pelis['id']
-    print(token)
-    movies=pelis['result']['movies'][peli_id-1]
-    print(movies)
-    #peli=pelis[peli_id]
-    kodi.reproducirPelis(peli_id, token)
-    #kodi.reproducirPelis(movies, token)
-    return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK', 'peli_id': movies})
+    kodi.reproducirPelis(peli_id)
+
+############# SERIES #############    
+
 
 @app.route("/kodi/series", methods=['GET', 'POST'])
 def kodi_series():
@@ -71,42 +67,35 @@ def kodi_series():
     return jsonify(series)
 
 @app.route("/kodi/series/<int:serie_id>", methods=['GET', 'POST'])
-def kodi_series_capitulos(serie_id):
+def kodi_series_temporadas(serie_id):
     print(serie_id)
-    series=kodi.obtenerSerieCapitulos(serie_id)
+    series=kodi.obtenerSerieTemporadas(serie_id)
     return jsonify(series)
 
 @app.route("/kodi/play/serie/<int:serie_id>", methods=['GET', 'POST'])
 def kodi_play_series_id(serie_id):
-    series=kodi.obtenerSeries()
-    token=series['id']
-    print(token)
-    movies=series['result']['tvshows'][serie_id-1]
-    print(movies)
-    #peli=pelis[peli_id]
-    kodi.reproducirSeries(serie_id, token)
-    return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK', 'serie_id': movies})
+    kodi.reproducirSeries(serie_id)
+
+@app.route("/kodi/seriedetalles/<int:serie_id>", methods=['GET', 'POST'])
+def kodi_serie_detalles(serie_id):
+    serie=kodi.obtenerSerieDetalles(serie_id)
+    return jsonify(serie)
+
+############ CONTROLES ###############
 
 @app.route("/kodi/play_pause", methods=['GET', 'POST'])
 def kodi_play_pausa():
-    series=kodi.obtenerSeries()
-    token=series['id']
     kodi.playPause()
-    return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK'})
 
 @app.route("/kodi/stop", methods=['GET', 'POST'])
 def kodi_stop():
-    series=kodi.obtenerSeries()
-    token=series['id']
     kodi.stop()
-    return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK'})
 
 @app.route("/kodi/cambiarVolumen/<int:vol>", methods=['GET', 'POST'])
 def kodi_cambiarVolumen(vol):
-    series=kodi.obtenerSeries()
-    token=series['id']
     kodi.cambiarVolumen(vol)
-    return jsonify({'id': token, 'jsonrpc': '2.0', 'result': 'OK'})
+
+############## CONTROL VOZ ##############
 
 
 @app.route("/test/v2", methods=['POST'])
@@ -121,7 +110,7 @@ def testinput():
         #print(textoDic['entities'][0]['value'])
         #texto=switchFuncVoz(funcion)
         #print(texto['result']['movies'])
-        tex = controlVoz.filtrarSintasisVoz(funcion, textoDic)
+        tex = controlVoz.filtrarSintasisVoz(kodi, funcion, textoDic)
     except Exception as e:
         print("No se ha podido entender el comando de voz")
         print("excepcion: ", e)
