@@ -16,7 +16,7 @@ npm run serve
 npm install --save my-dependency           
 ```
 
-### ejecuta el servidor javascript
+### ejecuta un archivo concreto de javascript
 ```
 node --experimental-modules prueWeb.js
 ```

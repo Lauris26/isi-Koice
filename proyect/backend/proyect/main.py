@@ -110,7 +110,7 @@ def testinput():
         #print(textoDic['entities'][0]['value'])
         #texto=switchFuncVoz(funcion)
         #print(texto['result']['movies'])
-        tex = controlVoz.filtrarSintasisVoz(funcion, textoDic)
+        tex = controlVoz.filtrarSintasisVoz(kodi, funcion, textoDic)
     except Exception as e:
         print("No se ha podido entender el comando de voz")
         print("excepcion: ", e)
