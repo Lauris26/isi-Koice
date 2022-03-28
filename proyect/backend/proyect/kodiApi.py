@@ -74,7 +74,6 @@ class KodiAPI:
 
         return peliFil
 
-
     def obtenerSeries(self):
         return self.addPortadaSerie(self.my_kodi.VideoLibrary.GetTVShows())
 
