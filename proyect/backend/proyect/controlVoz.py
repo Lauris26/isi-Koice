@@ -1,10 +1,11 @@
-import kodi
+from kodiApi import KodiAPI
 
 
-def filtrarSintasisVoz(funcion, dic=""):
+def filtrarSintasisVoz(kodi, funcion, dic=""):
     textoVoz=""
     if funcion =='obtenerPelis':
         textoJson=kodi.obtenerPelis()
+        print(textoJson)
         textoVoz=filtrarPelis(textoJson)
     elif funcion =='obtenerSeries':
         textoJson=kodi.obtenerSeries()
@@ -35,7 +36,7 @@ def filtrarPelis(textoJson):
 
     for video in textoJson['result']['movies']:
         print(video)
-        tex+="película numero "+str(video['movieid'])+" es "+video['label']+" "
+        tex+="película numero "+str(video['id'])+" es "+video['titulo']+" "
     return tex
 
 def filtrarSeries(textoJson):
@@ -43,5 +44,5 @@ def filtrarSeries(textoJson):
 
     for video in textoJson['result']['tvshows']:
         print(video)
-        tex+="serie numero "+str(video['tvshowid'])+" es "+video['label']+" "
+        tex+="serie numero "+str(video['id'])+" es "+video['titulo']+" "
     return tex

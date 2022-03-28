@@ -7,6 +7,10 @@ name = "pypi"
 kodipydent-alt = "*"
 Flask = "*"
 mypy = "*"
+pip = "*"
+install = "*"
+cinemagoer = "*"
+Flask-Cors = "*"
 
 [dev-packages]
 
