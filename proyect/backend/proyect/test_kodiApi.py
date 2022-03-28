@@ -35,6 +35,13 @@ class TestKodiApi(unittest.TestCase):
         print(primer_elemento)
         self.assertNotEqual(primer_elemento, 'error', "Should be not None")
 
+    def test_kodi_obtenerPelisFiltro(self):
+        library=self.my_kodi.obtenerPelisFiltro('Drama')
+        print(library)
+        primer_elemento = list(library)[0]
+        print(primer_elemento)
+        self.assertNotEqual(primer_elemento, 'error', "Should be not None")
+
     def test_kodi_obtenerSeries(self):
         library=self.my_kodi.obtenerSeries()
         print(library)
@@ -63,7 +70,6 @@ class TestKodiApi(unittest.TestCase):
         print(primer_elemento)
         self.assertNotEqual(primer_elemento, 'error', "Should be not None")
     
-
 
 if __name__ == '__main__':
     unittest.main()

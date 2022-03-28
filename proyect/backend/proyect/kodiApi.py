@@ -47,9 +47,6 @@ class KodiAPI:
         dicciSeries['result']['tvshowdetails']['actores']=obtenerActoresPeli(dicciSeries['result']['tvshowdetails']['title'])
         dicciSeries['result']['tvshowdetails']['seasons']=self.obtenerSerieTemporadas(dicciSeries['result']['tvshowdetails']['tvshowid'])['result']['seasons']
         return dicciSeries
-        
-    def obtenerToken(self):
-        return self.my_kodi.Application.GetProperties()
 
     def obtenerTodo(self):
         pelis = self.my_kodi.VideoLibrary.GetMovies()
@@ -80,6 +77,11 @@ class KodiAPI:
     def obtenerSerieTemporadas(self, idSerie):
         return self.my_kodi.VideoLibrary.GetSeasons(tvshowid=idSerie)
 
+    def obtenerSerieEpisodios(self, idSerie):
+        serie={'tvshowid':idSerie, 'season': 1}
+        #return self.my_kodi.VideoLibrary.GetEpisodes(item=serie)
+        return self.my_kodi.VideoLibrary.GetEpisodes(tvshoid=idSerie, season=1)
+
     def obtenerSerieDetalles(self, idSerie):
         return self.addActoresSerie(self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "year", "plot", "season", "episode", "genre"]))
 
@@ -90,10 +92,9 @@ class KodiAPI:
     def reproducirPelis(self, idPeli):
         self.my_kodi.Player.Open(item={'movieid':idPeli})
 
-    def reproducirSeries(self, idSerie, token):
-        serie={'tvshowid':idSerie, "seasonid":3}
+    def reproducirSeries(self, idSerie):
+        serie={'tvshowid':idSerie, "episodeid":3}
         self.my_kodi.Player.Open(item=serie)
-        {'id': token, 'jsonrpc': '2.0', 'result': 'OK'}
 
     def cambiarVolumen(self, vol):
         self.my_kodi.Application.SetVolume(volume=vol)
