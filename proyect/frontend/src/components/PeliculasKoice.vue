@@ -105,6 +105,7 @@ export default{
     },
   },
   created() {
+    this.s = this.$route.params.search;
     this.pelisC();
   }
 };

@@ -6,8 +6,8 @@
         <img class="logo-image" alt="" src="./assets/logo.png">
         <span class="fs-4">Koice</span>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li>
-            <router-link to="/peliculas" class="nav-link px-2 link-dark"> 
+          <li> 
+             <router-link to="/peliculas" class="nav-link px-2 link-dark">
               <img class="icons2" src="./assets/movie.png"> Peliculas
             </router-link>
           </li>
@@ -24,7 +24,7 @@
         </ul>
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <div class="search-icon">
-            <input type="search" class="form-control" placeholder="Buscar..." aria-label="Search">
+            <input type="search" class="form-control" placeholder="Buscar..." aria-label="Search" v-model="s">
             <div class="btn-group dropstart">
               <button class="btn-group dropstart" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#807e81" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21.57,5l-7.14,8.48A1.82,1.82,0,0,0,14,14.67V20a2,2,0,0,1-2,2h0a2,2,0,0,1-2-2V14.67a1.82,1.82,0,0,0-.43-1.18L2.43,5A1.82,1.82,0,0,1,2,3.83H2A1.83,1.83,0,0,1,3.83,2H20.17A1.83,1.83,0,0,1,22,3.83h0A1.82,1.82,0,0,1,21.57,5Z" fill="#807e81" opacity="1" stroke-width="0"></path><path d="M21.57,5l-7.14,8.48A1.82,1.82,0,0,0,14,14.67V20a2,2,0,0,1-2,2h0a2,2,0,0,1-2-2V14.67a1.82,1.82,0,0,0-.43-1.18L2.43,5A1.82,1.82,0,0,1,2,3.83H2A1.83,1.83,0,0,1,3.83,2H20.17A1.83,1.83,0,0,1,22,3.83h0A1.82,1.82,0,0,1,21.57,5Z"></path></svg>          
@@ -97,16 +97,6 @@ export default {
   components: {},
   data(){
     return{
-      peliculas:[
-        {
-          id: 1,
-          titulo: "vengadores"
-        },
-        {
-          id:2,
-          titulo: "vengadores 2"
-        }
-      ]
     }
   }
 };

@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { similaresPelis}  from '../main.js';
+import { similaresSeries}  from '../main.js';
 
 export default{
   name:"SeriesKoice",
@@ -78,7 +78,7 @@ export default{
       return peliculas2.poster;
     },
     pelisC(){
-      this.peliculas2 = similaresPelis();
+      this.peliculas2 = similaresSeries();
     },
   },
   created() {
