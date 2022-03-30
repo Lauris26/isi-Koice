@@ -1,7 +1,8 @@
+# proyect/__init__.py
+# proyect/kodiApi.py
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 from kodiApi import KodiAPI
-#import kodi
 import json
 import controlVoz
 
@@ -90,6 +91,14 @@ def kodi_play_pausa():
 @app.route("/kodi/stop", methods=['GET', 'POST'])
 def kodi_stop():
     kodi.stop()
+
+@app.route("/kodi/next", methods=['GET', 'POST'])
+def kodi_next():
+    kodi.avanceRapido(2)
+
+@app.route("/kodi/back", methods=['GET', 'POST'])
+def kodi_back():
+    kodi.retrocesoRapido(-2)
 
 @app.route("/kodi/cambiarVolumen/<int:vol>", methods=['GET', 'POST'])
 def kodi_cambiarVolumen(vol):

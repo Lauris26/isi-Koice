@@ -362,7 +362,6 @@ p{
 .row .col.year{
   text-align: left;
   margin-top: 0px !important;
-  background-color: blue;
   font-weight: bold !important;
 }
 
@@ -474,7 +473,7 @@ p{
   display: center;
 }
 
-.col.container a{
+.col.container button{
   background-color: #F1F0FC;
   width: 90px;
   border-radius: 10px;
@@ -483,14 +482,14 @@ p{
 }
 
 .col.container .row{
-  margin-top: 35px;
+  margin-top: 70px;
   align-content: center;
   display: block;
  
 }
 
 .col.container svg{
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .col.volumen .volumen-bar{
@@ -499,7 +498,7 @@ p{
   background: linear-gradient(0deg, rgba(251,252,253,1) 0%, rgba(179,54,187,0.737990264465161) 50%, rgba(154,33,185,1) 100%);
   width: 15%;
   border-radius: 15px; 
-  margin-left: 75px; /*ESTO SE TIENE QUE CAMBIAR*/
+  margin-left: 75px; 
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -594,16 +593,20 @@ p{
 
 } 
 
-.pasarSiguiente{
+.btnPasarSiguiente{
   position: absolute;
   left: 7%;
   bottom: 37%;
+  border: none;
+  background-color: #F1F0FC;
 }
 
-.volverAtras{
+.btnvolverAtras{
   position: absolute;
   left:75%;
   bottom: 37%;
+  border: none;
+  background-color: #F1F0FC;
 }
 
 .chevronDown{
@@ -623,4 +626,9 @@ p{
   height: 50px;
   margin-top: 30%;
   margin-left: 5%;
+}
+
+.col .volumen button{
+  background-color: white;
+  border: none;
 }

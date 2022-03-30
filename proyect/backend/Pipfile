@@ -11,6 +11,7 @@ pip = "*"
 install = "*"
 cinemagoer = "*"
 Flask-Cors = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

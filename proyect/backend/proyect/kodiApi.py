@@ -80,7 +80,7 @@ class KodiAPI:
     def obtenerSerieEpisodios(self, idSerie):
         serie={'tvshowid':idSerie, 'season': 1}
         #return self.my_kodi.VideoLibrary.GetEpisodes(item=serie)
-        return self.my_kodi.VideoLibrary.GetEpisodes(tvshoid=idSerie, season=1)
+        return self.my_kodi.VideoLibrary.GetEpisodes(seasonid=3)
 
     def obtenerSerieDetalles(self, idSerie):
         return self.addActoresSerie(self.my_kodi.VideoLibrary.GetTVShowDetails(tvshowid=idSerie, properties=["title", "year", "plot", "season", "episode", "genre"]))
@@ -107,6 +107,11 @@ class KodiAPI:
 
     #my_kodi.Input.ExecuteAction("back")
     def ejecutarComando(self, comando):
+        #self.my_kodi.Input.Right()
         self.my_kodi.Input.ExecuteAction(action=comando)
 
+    def avanceRapido(self, velocidad):
+        self.my_kodi.Player.SetSpeed(playerid=1, speed=velocidad)
 
+    def retrocesoRapido(self, velocidad):
+        self.my_kodi.Player.SetSpeed(playerid=1, speed=velocidad)

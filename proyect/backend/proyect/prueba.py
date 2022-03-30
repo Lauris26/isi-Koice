@@ -16,10 +16,14 @@ def obtenerKodi(IP_KODI, PORT_KODI):
 
 kodi = obtenerKodi(IP_KODI, PORT_KODI)
 
-print(kodi.obtenerSeries())
+#print(kodi.obtenerSeries())
 
-print(kodi.obtenerSerieTemporadas(1))
+#print(kodi.obtenerSerieTemporadas(1))
 
-print(kodi.obtenerSerieEpisodios(1))
+#print(kodi.obtenerSerieEpisodios(1))
 
-kodi.reproducirSeries(1)
+#kodi.reproducirSeries(1)
+
+#kodi.ejecutarComando('pageup')
+
+kodi.retrocesoRapido()
