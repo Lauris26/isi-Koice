@@ -1,12 +1,12 @@
 # prueba
 
 
-## Project setup
+## Instala las dependencias necesarias
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Ejecuta el servidor
 ```
 npm run serve
 ```

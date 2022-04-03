@@ -1,10 +1,19 @@
-############################################ alternativa a venv y virtualenv ##########################################
+############################################ crear el entorno virtual de python con (venv, virtualenv, pipenv, etc) ##########################################
+################################################################## ejemplo creado para pipenv ################################################################
+
 pip install pipenv                          --> instala el paquete de entornos virtuales pipenv
-pipenv shell                                --> crea un entorno virtual con el nombre de la carpeta actual y entra a el (en caso de estar creado unicamente entra a el)
+
+pipenv install                              --> instala todas las dependencias necesarias (en caso de usar otro gestor de entorno virtual se incluye un requirements)
+
+pipenv run server                           --> ejecuta el servidor
+
+####################################################################### UTILIDADES ###########################################################################
+
+pipenv shell                                --> crea un entorno virtual con el nombre de la carpeta actual y entra a el abriendo una consola
 pipenv exit                                 --> sale del entorno virtual
 
-
-pipenv install -r requirements.txt          --> instala las dependencias necesarias
+######################################################## instalar dependencias en caso de no usar pipenv ######################################################
+pip install -r requirements.txt             --> instala las dependencias necesarias
 pip freeze > requirements.txt               --> guarda las depdencias actuales
 
 ################# exporta la variable de entorno para tu sistema operativo y consola de comandos usada ################
@@ -12,10 +21,12 @@ export FLASK_APP="main.py"                  --> LINUX/MAC;           declara la 
 set FLASK_APP=main.py                       --> WINDOWS/CMD;         declara la variable de entorno para ejecutar el servidor (set windows CMD)
 $env:FLASK_APP = "main.py"                  --> WINDOWS/POWERSHELL;  declara la variable de entorno para ejecutar el servidor ($env: windows PowerShel)
 
+############################################## cambio de entorno flask ################################################
 export FLASK_ENV=development                --> LINUX/MAC; cambia a entorno de desarrollo en lugar de production
+
 #######################################################################################################################
 
 flask run                                   --> ejecuta el servidor flask con la aplicacion definida en el entorno
 
-
+####################################################### ejecucion de test #############################################
 python -m unittest -v test_kodiApi.py       --> ejecuta la prueba unitest

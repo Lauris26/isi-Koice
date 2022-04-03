@@ -17,3 +17,6 @@ python-dotenv = "*"
 
 [requires]
 python_version = "3"
+
+[scripts]
+server = "python ./proyect/main.py"
