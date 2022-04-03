@@ -14,7 +14,7 @@ runfrontend:
 	cd $(DIRSRCFRONTEND) && $(CCFRONTEND) run serve
 
 runbackend:
-	pipenv run $(CCBACKEND)  ./proyect/main.py
+	cd $(DIRSRCBACKEND) && pipenv run $(CCBACKEND) ./proyect/main.py
 
 entervenv:
 	 cd $(DIRSRCBACKEND) && pipenv shell

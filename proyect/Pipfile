@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+kodipydent-alt = "*"
+Flask = "*"
+mypy = "*"
+pip = "*"
+install = "*"
+cinemagoer = "*"
+Flask-Cors = "*"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3"
+
+[scripts]
+server = "python ./proyect/main.py"
