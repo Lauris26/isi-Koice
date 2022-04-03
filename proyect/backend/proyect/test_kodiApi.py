@@ -55,6 +55,13 @@ class TestKodiApi(unittest.TestCase):
         primer_elemento = list(library)[0]
         print(primer_elemento)
         self.assertNotEqual(primer_elemento, 'error', "Should be not None")
+
+    def test_kodi_obtenerSerieEpisodios(self):
+        library=self.my_kodi.obtenerSerieEpisodios(1)
+        print(library)
+        primer_elemento = list(library)[0]
+        print(primer_elemento)
+        self.assertNotEqual(primer_elemento, 'error', "Should be not None")
     
     def test_kodi_obtenerSerieDetalles(self):
         library=self.my_kodi.obtenerSerieDetalles(1)
