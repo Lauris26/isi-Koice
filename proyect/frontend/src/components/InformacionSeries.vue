@@ -76,7 +76,9 @@
           </div>    
       </div> 
     </div>
+
   </div>
+  
 </template>
 
 <script>
@@ -87,7 +89,7 @@ export default{
     return {
       id: 0,
       repartoActores: [],
-      similaresSeriess: []
+      similaresSeriess: [],
     }
   },
   methods: {
@@ -102,6 +104,8 @@ export default{
     this.id = this.$route.params.id;
     this.similaresSeriess = similaresSeries();
     this.repartoActores = reparto();
+    console.log("holi");
+
   },
 }
 </script>

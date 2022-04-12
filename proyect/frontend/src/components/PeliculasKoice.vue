@@ -94,6 +94,8 @@ export default{
     return{
       peliculas2 : [],
       peliculas3: null, 
+      s: '',
+      filter:'',
     }
   },
   methods: {
@@ -105,8 +107,9 @@ export default{
     },
   },
   created() {
-    this.s = this.$route.params.search;
     this.pelisC();
+    this.filter = this.$route.params.filter;
+    this.s = this.$route.params.s;
   }
 };
 </script>

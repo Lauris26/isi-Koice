@@ -60,6 +60,7 @@
         </div>
       </div>
     </div>
+    <h1>{{this.s}}</h1>
   </div>
 </template>
 
@@ -70,7 +71,8 @@ export default{
   name:"SeriesKoice",
   data: function(){
     return{
-      peliculas2:[]
+      peliculas2:[],
+      s: 'asdfasf',
     }
   },
   methods: {
@@ -83,6 +85,7 @@ export default{
   },
   created() {
     this.pelisC();
+    this.s = this.$route.params.s;
   }
 };
 
