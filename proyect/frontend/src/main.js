@@ -5,12 +5,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
 {
-        path: '/peliculas/:filter/:s',
+        path: '/peliculas',
         name: 'peliculas',
         component: () => import('./components/PeliculasKoice.vue')
     },
     {
-        path: '/series/:s',
+        path: '/series',
         name: 'series',
         component: () => import('./components/SeriesKoice.vue')
     },
