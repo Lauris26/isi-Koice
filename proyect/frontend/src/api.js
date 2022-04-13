@@ -4,7 +4,12 @@ export async function obtenerPeliculas(){
     const response = await fetch("http://127.0.0.1:5000/kodi/pelis")
     const body = await response.json()
     return body['result']['movies'];
-  
+}
+
+export async function obtenerPeliculasFiltro(filtro, valor){
+    const response = await fetch("http://127.0.0.1:5000/kodi/pelis/"+filtro+"_"+valor)
+    const body = await response.json()
+    return body['result']['movies'];
 }
 
 export async function obtenerSeries(){

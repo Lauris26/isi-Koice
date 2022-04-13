@@ -47,13 +47,17 @@ def kodi_pelis_filtro(filtro):
         dato=filtro.split("_")[1]
         print("tipo: ", tipo)
         print("dato: ", dato)
-        pelis=kodi.obtenerPelisFiltro(dato)
+        if(dato.isnumeric()):
+            tipo="year"
+        pelis=kodi.obtenerPelisFiltro(tipo, dato)
         return jsonify(pelis)
     except:
         print("error en filtro")
+    
     finally:
-        pelis=kodi.obtenerPelisFiltro(filtro)
+        pelis=kodi.obtenerPelisFiltro(tipo, dato)
         return jsonify(pelis)
+    
 
 @app.route("/kodi/play/peli/<int:peli_id>", methods=['GET', 'POST'])
 def kodi_play_pelis_id(peli_id):

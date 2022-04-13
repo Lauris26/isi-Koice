@@ -54,8 +54,6 @@ class KodiAPI:
         library = self.my_kodi.VideoLibrary.Export()
         dicLibrary = {'pelis': pelis['result'], 'series': series['result']}
         library['result'] = dicLibrary
-        #library['pelis'] = pelis['result']
-        #library['series'] = series['result']
         return library
     
 
@@ -65,10 +63,15 @@ class KodiAPI:
     def obtenerPeliDetalles(self, idPeli):
         return self.addActores(self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"]))
 
-    def obtenerPelisFiltro(self, filtro):
-        #pelis=self.my_kodi.VideoLibrary.GetGenres(type='movie')
-        peliFil=self.my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": "genre", "value": filtro}, properties=["title", "runtime", "year", "plot", "genre"])
+    def obtenerPelisFiltro(self, filtro, valor):
 
+        print("el filtro es: ", filtro, " y el valor es: ", valor)
+        peliFil=self.my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": filtro, "value": valor}, properties=["title", "runtime", "year", "plot", "genre"])
+        print(peliFil)
+        if list(peliFil)[0]=='error':
+            return peliFil
+        peliFil=self.addPortada(peliFil)
+        print(peliFil)
         return peliFil
 
     def obtenerSeries(self):
