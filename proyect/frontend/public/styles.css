@@ -409,7 +409,7 @@ p{
   margin: 20px;
 }
 
-.filtros a{
+.filtros button{
   width: fit-content;
   min-width: 100px;
   border-radius: 20px;
@@ -631,4 +631,10 @@ p{
 .col .volumen button{
   background-color: white;
   border: none;
+}
+
+.botonBuscar{
+  background-color: white;
+  border: none;
+
 }

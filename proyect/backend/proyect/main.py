@@ -3,6 +3,7 @@
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 from kodiApi import KodiAPI
+import jwt
 import json
 import controlVoz
 
@@ -25,13 +26,20 @@ def obtenerKodi(IP_KODI, PORT_KODI):
 
 kodi = obtenerKodi(IP_KODI, PORT_KODI)
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 def home():
+    print(request.headers)
+    if request.headers.get('Content-Type') == 'application/json':
+        print('entra al if')
+        data=request.get_json()
+        print(data)
+        return kodi.obtenerTodo()
     return kodi.obtenerTodo()
 
 @app.route("/kodi/pelis", methods=['GET', 'POST'])
 def kodi_pelis():
     pelis=kodi.obtenerPelis()
+    
     return jsonify(pelis)
 
 @app.route("/kodi/pelidetalles/<int:peli_id>", methods=['GET', 'POST'])
@@ -41,19 +49,37 @@ def kodi_pelis_detalles(peli_id):
 
 @app.route("/kodi/pelis/<string:filtro>", methods=['GET', 'POST'])
 def kodi_pelis_filtro(filtro):
-    print("dentro de filtro: ", filtro)
+    #print("dentro de filtro: ", filtro)
     try:
         tipo=filtro.split("_")[0]
         dato=filtro.split("_")[1]
-        print("tipo: ", tipo)
-        print("dato: ", dato)
-        pelis=kodi.obtenerPelisFiltro(dato)
+        #print("tipo: ", tipo)
+        #print("dato: ", dato)
+        if(dato.isnumeric()):
+            tipo="year"
+        pelis=kodi.obtenerPelisFiltro(tipo, dato)
         return jsonify(pelis)
     except:
         print("error en filtro")
+    
     finally:
-        pelis=kodi.obtenerPelisFiltro(filtro)
+        pelis=kodi.obtenerPelisFiltro(tipo, dato)
         return jsonify(pelis)
+
+@app.route("/kodi/pelis/filtro", methods=['POST'])
+def kodi_pelis_filtro_secure():
+    if request.headers.get('Content-Type') == 'application/json':
+        data=request.get_json()
+        #print(data)
+        tipo=data["tipo"]
+        dato=data["dato"]
+        #print("tipo: ", tipo)
+        #print("dato: ", dato)
+        if(dato.isnumeric()):
+            tipo="year"
+        pelis=kodi.obtenerPelisFiltro(tipo, dato)
+        return jsonify(pelis)
+    
 
 @app.route("/kodi/play/peli/<int:peli_id>", methods=['GET', 'POST'])
 def kodi_play_pelis_id(peli_id):
@@ -116,98 +142,17 @@ def testinput():
         funcion=textoDic['intent']['name']
         print("funcion : ",funcion)
         print(textoDic['entities'])
-        #print(textoDic['entities'][0]['value'])
-        #texto=switchFuncVoz(funcion)
-        #print(texto['result']['movies'])
         tex = controlVoz.filtrarSintasisVoz(kodi, funcion, textoDic)
     except Exception as e:
         print("No se ha podido entender el comando de voz")
         print("excepcion: ", e)
 
-    #tex= "has ejecutado la funcion "+funcion+" ,"
     print(tex)
     return jsonify({
     "speech": {
         "text": tex
         }
     })
-
-
-'''
-def filtrarSintasisVoz(funcion, dic=""):
-    textoVoz=""
-    if funcion =='obtenerPelis':
-        textoJson=kodi.obtenerPelis()
-        textoVoz=filtrarPelis(textoJson)
-    elif funcion =='obtenerSeries':
-        textoJson=kodi.obtenerSeries()
-        textoVoz=filtrarSeries(textoJson)
-    elif funcion =='reproPeli':
-        peli_id=dic['entities'][0]['value']
-        kodi_play_pelis_id(peli_id)
-        textoVoz="reproduciendo la pelicula numero "+str(peli_id)
-    elif funcion =='reproSerie':
-        serie_id=dic['entities'][0]['value']
-        kodi_play_series_id(serie_id)
-        textoVoz="reproduciendo la serie numero "+str(serie_id)
-    elif funcion =='playPausa':
-        kodi_play_pausa()
-        textoVoz="pausando el video"
-    elif funcion =='stop':
-        kodi_stop()
-        textoVoz="parando el video"
-    elif funcion =='cambiarVolumen':
-        vol=dic['entities'][0]['value']
-        kodi_cambiarVolumen(vol)
-        textoVoz="volumen establecido en "+str(vol)
-
-    return textoVoz
-
-def filtrarPelis(textoJson):
-    tex= "La lista de peliculas es: "
-
-    for video in textoJson['result']['movies']:
-        print(video)
-        tex+="película numero "+str(video['movieid'])+" es "+video['label']+" "
-    return tex
-
-def filtrarSeries(textoJson):
-    tex= "La lista de series es: "
-
-    for video in textoJson['result']['tvshows']:
-        print(video)
-        tex+="serie numero "+str(video['tvshowid'])+" es "+video['label']+" "
-    return tex
-
-
-@app.route("/test/v1", methods=['POST'])
-def testinput2():
-    print("\n\targumentos:")
-    print(request.args)
-    print("\n\tformulario:")
-    print(request.form)
-    print("\n\tobjeto adjunto:")
-    print(request.data)
-    print("\n\tcabecera:")
-    print(request.headers)
-    textoDic=json.loads(request.data.decode('utf-8'))
-    texto=textoDic['intent']['name']
-    print("texto tal: ",texto)
-    tex= "has ejecutado la funcion "+texto
-    return jsonify({
-    "speech": {
-        "text": tex
-        }
-    })
-
-def switchFuncVoz(funcion):
-    switch = {
-        'obtenerPelis' : kodi.obtenerPelis(),
-        'obtenerSeries' : kodi.obtenerSeries(),
-    }
-    return switch.get(funcion, "invalido")
-
-'''
 
 
 if __name__ == '__main__':
