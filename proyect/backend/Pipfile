@@ -12,6 +12,7 @@ install = "*"
 cinemagoer = "*"
 Flask-Cors = "*"
 python-dotenv = "*"
+pyjwt = "*"
 
 [dev-packages]
 

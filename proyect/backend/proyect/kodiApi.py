@@ -65,13 +65,13 @@ class KodiAPI:
 
     def obtenerPelisFiltro(self, filtro, valor):
 
-        print("el filtro es: ", filtro, " y el valor es: ", valor)
+        #print("el filtro es: ", filtro, " y el valor es: ", valor)
         peliFil=self.my_kodi.VideoLibrary.GetMovies(filter={"operator": "contains", "field": filtro, "value": valor}, properties=["title", "runtime", "year", "plot", "genre"])
-        print(peliFil)
+        #print(peliFil)
         if list(peliFil)[0]=='error':
             return peliFil
         peliFil=self.addPortada(peliFil)
-        print(peliFil)
+        #print(peliFil)
         return peliFil
 
     def obtenerSeries(self):
