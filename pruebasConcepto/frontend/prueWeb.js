@@ -24,7 +24,39 @@ function convertToDataURLviaCanvas(url, callback, outputFormat){
 }
 
 async function obtenerLibrary(){
-  const response = await fetch('http://127.0.0.1:5000/');
+
+  const response = await fetch('http://127.0.0.1:5000/', {
+  method: 'POST',
+  //mode: 'cors',
+  //cache: 'default',
+  headers: {
+    'Content-Type': 'application/json'
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: JSON.stringify({'datos': 'hola'}) });
+
+  //const response = await fetch('http://127.0.0.1:5000/');
+  const body = await response.text();
+
+  console.log(body);
+  //const body = await response.text();
+  //var jsonData = JSON.parse(body);
+  return body['result'];
+}
+
+async function obtenerPelisFiltro(){
+
+  const response = await fetch('http://127.0.0.1:5000/kodi/pelis/year_2012', {
+  method: 'POST',
+  //mode: 'cors',
+  //cache: 'default',
+  headers: {
+    'Content-Type': 'application/json'
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: JSON.stringify({'tipo': 'year', 'dato':'20'}) });
+
+  //const response = await fetch('http://127.0.0.1:5000/');
   const body = await response.text();
 
   console.log(body);
@@ -61,7 +93,8 @@ async function reproducirPeliId(idPeli) {
 
 console.log("inicio");
 
-obtenerLibrary();
+await obtenerPelisFiltro();
+//await obtenerLibrary();
 //console.log(obtenerLibrary());
 
 //var idPeli = await obtenerPelis();

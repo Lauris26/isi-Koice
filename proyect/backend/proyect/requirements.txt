@@ -3,3 +3,4 @@ kodipydent-alt
 mypy
 cinemagoer
 flask-cors
+PyJWT

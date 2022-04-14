@@ -26,4 +26,6 @@ kodi = obtenerKodi(IP_KODI, PORT_KODI)
 
 #kodi.ejecutarComando('pageup')
 
-kodi.retrocesoRapido()
+#kodi.retrocesoRapido()
+
+kodi.obtenerPelisFiltro('year', '2009')
