@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  koicebackend:
+      image: "koicebackend"
+      container_name: koicebackend
+      restart: unless-stopped
+      network_mode: host
