@@ -30,3 +30,12 @@ flask run                                   --> ejecuta el servidor flask con la
 
 ####################################################### ejecucion de test #############################################
 python -m unittest -v test_kodiApi.py       --> ejecuta la prueba unitest
+
+
+##################################################### DESPLIEGUE DOCKER ###############################################
+
+docker build -f Dockerfile -t koicebackend:latest .         --> construye la imagen del backend
+
+docker run -p 5000:5000 -i --network host koicebackend      --> crea el contenedor y lo ejecuta ('-i' esta opcion mantiene la entrada de teclado abierta)
+
+docker-compose up                                           --> crea y ejecuta el contenedor con el archivo docker-compose incluido

@@ -6,6 +6,5 @@ ADD . /backend/
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
-EXPOSE 10080
 
 CMD ["python", "/backend/main.py"]
