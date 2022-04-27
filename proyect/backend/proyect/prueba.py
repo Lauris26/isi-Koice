@@ -28,4 +28,6 @@ kodi = obtenerKodi(IP_KODI, PORT_KODI)
 
 #kodi.retrocesoRapido()
 
-kodi.obtenerPelisFiltro('year', '2009')
+kodi.obtenerPeliDetalles(1)
+
+#kodi.obtenerPelisFiltro('year', '2009')
