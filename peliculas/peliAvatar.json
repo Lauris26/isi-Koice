@@ -1,0 +1,48 @@
+{
+    "id": "2d0a7032d97143398b090b6e5e8d3c5d",
+    "jsonrpc": "2.0",
+    "result": {
+        "moviedetails": {
+            "genre": [
+                "Action",
+                "Adventure",
+                "Fantasy",
+                "Science Fiction"
+            ],
+            "label": "Avatar",
+            "movieid": 1,
+            "plot": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+            "runtime": 162,
+            "title": "Avatar",
+            "year": 2009,
+            "poster": "https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@.jpg",
+            "actores": [
+                {
+                    "id": 0,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMTc5NTMyMjIwMV5BMl5BanBnXkFtZTcwNTMyNjYwMw@@.jpg",
+                    "nombre": "Sam Worthington"
+                },
+                {
+                    "id": 1,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMTM2MjIwOTc0Nl5BMl5BanBnXkFtZTcwNzQ5ODM1Mw@@.jpg",
+                    "nombre": "Zoe Saldana"
+                },
+                {
+                    "id": 2,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@.jpg",
+                    "nombre": "Sigourney Weaver"
+                },
+                {
+                    "id": 3,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMjE4NzYwNTc5Nl5BMl5BanBnXkFtZTcwMzQzOTUyNw@@.jpg",
+                    "nombre": "Stephen Lang"
+                },
+                {
+                    "id": 4,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMTkwODIzMzYyMl5BMl5BanBnXkFtZTYwNzAyNjAz.jpg",
+                    "nombre": "Michelle Rodriguez"
+                }
+            ]
+        }
+    }
+}

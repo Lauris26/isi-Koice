@@ -1,0 +1,47 @@
+{
+    "id": "5df6f81724054a4db5675103a5559001",
+    "jsonrpc": "2.0",
+    "result": {
+        "moviedetails": {
+            "genre": [
+                "Science Fiction",
+                "Action",
+                "Adventure"
+            ],
+            "label": "The Avengers",
+            "movieid": 2,
+            "plot": "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
+            "runtime": 143,
+            "title": "The Avengers",
+            "year": 2012,
+            "poster": "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@.jpg",
+            "actores": [
+                {
+                    "id": 0,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@.jpg",
+                    "nombre": "Robert Downey Jr."
+                },
+                {
+                    "id": 1,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMTU2NTg1OTQzMF5BMl5BanBnXkFtZTcwNjIyMjkyMg@@.jpg",
+                    "nombre": "Chris Evans"
+                },
+                {
+                    "id": 2,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BNWIzZTI1ODUtZTUzMC00NTdiLWFlOTYtZTg4MGZkYmU4YzNlXkEyXkFqcGdeQXVyNTExOTk5Nzg@.jpg",
+                    "nombre": "Mark Ruffalo"
+                },
+                {
+                    "id": 3,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BOTU2MTI0NTIyNV5BMl5BanBnXkFtZTcwMTA4Nzc3OA@@.jpg",
+                    "nombre": "Chris Hemsworth"
+                },
+                {
+                    "id": 4,
+                    "foto": "https://m.media-amazon.com/images/M/MV5BMTM3OTUwMDYwNl5BMl5BanBnXkFtZTcwNTUyNzc3Nw@@.jpg",
+                    "nombre": "Scarlett Johansson"
+                }
+            ]
+        }
+    }
+}

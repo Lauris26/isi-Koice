@@ -338,8 +338,8 @@ p{
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 5px;
-  margin-left: 5px;
+  margin-bottom: 50px;
+  margin-left: 0px;
 }
 
 .tituloElemento{
@@ -506,11 +506,11 @@ p{
 .play{
   background-color: white;
   border-radius: 100px;
-  height: 200px;
-  width: 200px;
+  height: 170px;
+  width: 170px;
   margin: 0 auto;
   position: relative;
-  margin-top: 13%;
+  margin-top: 70px;
   display: flex;
   justify-content: center;
 }
@@ -595,10 +595,10 @@ p{
 
 .btnPasarSiguiente{
   position: absolute;
-  left: 7%;
+  left: 0%;
   bottom: 37%;
   border: none;
-  background-color: #F1F0FC;
+  background-color: transparent;
 }
 
 .btnvolverAtras{
@@ -606,7 +606,7 @@ p{
   left:75%;
   bottom: 37%;
   border: none;
-  background-color: #F1F0FC;
+  background-color: transparent;
 }
 
 .chevronDown{
@@ -623,7 +623,7 @@ p{
 .boton-play{
   background-color: white;
   border: none;
-  height: 50px;
+  height: 90px;
   margin-top: 30%;
   margin-left: 5%;
 }

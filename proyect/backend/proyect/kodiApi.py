@@ -1,5 +1,8 @@
 from kodipydent import Kodi # type: ignore
 from imdbApi import obtenerPortada, obtenerActoresPeli, obtenerPortadaTemporada
+import os
+import pathlib
+import json
 
 
 class KodiAPI:
@@ -61,7 +64,26 @@ class KodiAPI:
         return self.addPortada(self.my_kodi.VideoLibrary.GetMovies())
 
     def obtenerPeliDetalles(self, idPeli):
-        return self.addActores(self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"]))
+        peliFil=self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"])
+        titulo=peliFil['result']['moviedetails']['title']
+        #print(peliFil)
+        if list(peliFil)[0]=='error':
+            return peliFil
+
+        archivo=sorted(pathlib.Path('.').glob('peliculas/*'+titulo+'.json'))
+        if (archivo!=[]):
+            importarLista(archivo[0].name)
+            return importarLista(archivo[0].name)
+            #result=importarLista(archivo[0].name)
+            #peliFil=self.addActores(peliFil)
+        else:
+            peliFil=self.addActores(peliFil)
+            exportarLista(peliFil)
+        
+            #print(peliFil)
+            return peliFil
+
+        #return self.addActores(self.my_kodi.VideoLibrary.GetMovieDetails(movieid=idPeli, properties=["title", "runtime", "year", "plot", "genre"]))
 
     def obtenerPelisFiltro(self, filtro, valor):
 
@@ -70,6 +92,7 @@ class KodiAPI:
         #print(peliFil)
         if list(peliFil)[0]=='error':
             return peliFil
+
         peliFil=self.addPortada(peliFil)
         #print(peliFil)
         return peliFil
@@ -118,3 +141,25 @@ class KodiAPI:
 
     def retrocesoRapido(self, velocidad):
         self.my_kodi.Player.SetSpeed(playerid=1, speed=velocidad)
+
+
+def importarLista(nombre):
+    lista=[]
+    with open("peliculas/"+nombre, "r") as f:
+        lista=json.load(f)
+    return lista
+
+def exportarLista(lista):
+    #current_directory = os.path.dirname(os.path.realpath(__file__))
+    #directorio = os.path.join(current_directory, 'peliculas')
+
+    #peli=sorted(pathlib.Path('.').glob('peliculas/*1951.json'))
+    #anio=lista[0]['Release_Date_Theaters']
+    #anio=anio[len(anio)-4:]
+
+    nombre='peliculas/peli'+lista['result']['moviedetails']['title']+'.json'
+    try:
+        with open(nombre, 'w') as f:
+            json.dump(lista, f, indent=4)
+    except Exception as e:
+        print('error al exportar ', e)
